@@ -3,12 +3,12 @@ import {Pressable, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {style} from './style';
 
-const Button = ({title, handleClick, accessibilityLabel = ''}) => {
+const Button = ({title, onPress, accessibilityLabel = ''}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       style={style.button}
-      onPress={handleClick}
+      onPress={onPress}
       accessibilityLabel={title}>
       <LinearGradient
         colors={['#F9881F', '#ED474A']}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   View,
@@ -8,16 +8,17 @@ import {
   Pressable,
   ImageBackground,
 } from 'react-native';
-import {style} from './style';
-import {Icons} from '../../../Utility/Icons';
+import { style } from './style';
+import { Icons } from '../../../Utility/Icons';
 import Input from '../../../Components/Input';
 import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
   const navigateToSignUp = () => {
     navigation.navigate('signup');
+
   };
   return (
     <SafeAreaView>
