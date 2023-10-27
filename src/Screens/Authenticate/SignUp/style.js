@@ -53,7 +53,7 @@ export const style = StyleSheet.create({
   helightedText: {
     fontFamily: 'Plus Jakarta Sans',
     color: colors.primary,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   googleSignContainer: {
     flexDirection: 'row',

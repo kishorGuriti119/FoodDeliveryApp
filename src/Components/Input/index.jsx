@@ -38,32 +38,23 @@
 
 import React from 'react';
 import {Pressable, Text, TextInput, View, Image} from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import {style} from './style';
 import DropDown from '../DropDown';
 
 const Input = ({
   label,
   icon,
+  isPassword,
   placeholder,
   onChangeText = () => {},
   isMobileNumber,
   value = '',
 }) => {
-  const items = [
-    {label: 'JavaScript', value: 'JavaScript'},
-    {label: 'TypeScript', value: 'TypeScript'},
-    {label: 'Python', value: 'Python'},
-    {label: 'Java', value: 'Java'},
-    {label: 'C++', value: 'C++'},
-    {label: 'C', value: 'C'},
-  ];
-
   return (
     <View style={style.Container}>
       {label ? <Text style={style.labelText}>{label}</Text> : null}
       <Pressable style={style.InputContainer}>
-        {icon ? (
+        {icon && !isPassword ? (
           <View>
             <Image source={icon} style={style.InputIcon} />
           </View>
@@ -71,14 +62,19 @@ const Input = ({
           <DropDown />
         ) : null}
         {!isMobileNumber ? (
-          <TextInput placeholder={placeholder} style={style.input} />
+          <TextInput
+            placeholder={placeholder}
+            style={style.input}
+            onChangeText={onChangeText}
+            secureTextEntry={isPassword}
+          />
         ) : (
           <TextInput
             placeholder={placeholder}
             keyboardType="numeric"
             style={style.input}
             onChangeText={onChangeText}
-            value={value}
+            maxLength={10}
           />
         )}
       </Pressable>

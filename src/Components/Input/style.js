@@ -9,7 +9,7 @@ export const style = StyleSheet.create({
   labelText: {
     color: colors.secondary,
     fontFamily: 'Plus Jakarta Sans',
-    fontWeight: '600',
+    fontWeight: '700',
     fontSize: 12,
   },
   InputContainer: {
