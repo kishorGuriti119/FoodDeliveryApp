@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -6,19 +6,38 @@ import {
   SafeAreaView,
   Image,
   Pressable,
-  ImageBackground,
 } from 'react-native';
-import { style } from './style';
-import { Icons } from '../../../Utility/Icons';
+import {style} from './style';
+import {globelstyle} from '../../../Utility/GlobelStyles';
+import {Icons} from '../../../Utility/Icons';
 import Input from '../../../Components/Input';
 import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
+import {useFormik} from 'formik';
+import {ValidateLogin} from '../../../Validations/InputValidation';
 
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async values => {
+      console.log(values);
+      const {isValid, errors} = await ValidateLogin(values);
+      if (isValid) {
+        console.log('login succuss');
+      } else {
+        console.log(errors);
+        formik.setErrors(errors);
+      }
+    },
+  });
+
   const navigateToSignUp = () => {
     navigation.navigate('signup');
-
   };
   return (
     <SafeAreaView>
@@ -36,9 +55,28 @@ const Login = ({ navigation }) => {
             <Input
               label=""
               placeholder="Enter email"
+              name="email"
               style={style.loginInput}
+              onChangeText={formik.handleChange('email')}
+              value={formik.values.email}
             />
-            <Input label="" placeholder="Enter Password" />
+            {formik.touched.email && formik.errors.email ? (
+              <Text style={globelstyle.errorText}>{formik.errors.email}</Text>
+            ) : null}
+            <Input
+              label=""
+              name="password"
+              isPassword
+              placeholder="Enter Password"
+              onChangeText={formik.handleChange('password')}
+              value={formik.values.password}
+              icon={Icons.closed_eye}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <Text style={globelstyle.errorText}>
+                {formik.errors.password}
+              </Text>
+            ) : null}
           </View>
           <View style={style.loginActions}>
             <View style={style.checkBoxContainer}>
@@ -50,7 +88,7 @@ const Login = ({ navigation }) => {
             </Pressable>
           </View>
           <View>
-            <Button title="Login" />
+            <Button title="Login" onPress={formik.handleSubmit} />
           </View>
 
           <Text style={style.footerText}>
