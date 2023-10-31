@@ -69,7 +69,7 @@ const SignUp = ({navigation}) => {
           <View style={style.FormContainer}>
             <Input
               label="Full name"
-              placeholder="Virat Kohli"
+              placeholder="Enter Fullname"
               icon={Icons.user}
               onChangeText={formik.handleChange('name')}
             />

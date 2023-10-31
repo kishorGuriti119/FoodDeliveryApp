@@ -46,7 +46,7 @@ const Login = ({navigation}) => {
           <Image source={Icons.AppLogo} style={style.Applogo} />
           <Text style={style.LogoText}>FoodApp</Text>
         </View>
-        <View style={style.bottomContainer}>
+        <ScrollView style={style.bottomContainer}>
           <View>
             <Text style={style.login}>Login</Text>
           </View>
@@ -98,7 +98,7 @@ const Login = ({navigation}) => {
               Sign-up
             </Text>
           </Text>
-        </View>
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );

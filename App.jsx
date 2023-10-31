@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, {useEffect, useState} from 'react';
+import {Text, View, ImageBackground, StyleSheet} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/Screens/Authenticate/Login';
 import SignUp from './src/Screens/Authenticate/SignUp';
 import Splash from './src/Components/Splash';
+import AdminDashboard from './src/Screens/Interface/Admin/Dashboard';
+import RestaurantForm from './src/Screens/Interface/Restaurant/Register';
+import PilotRegister from './src/Screens/Interface/Pilot/Register';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,14 +25,12 @@ const SplashScreen = () => {
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
-  const [isAuthToken,setAuthToken] = useState(false)
+  const [isAuthToken, setAuthToken] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
-    }, 1000)
-
-
+    }, 1000);
   }, []);
 
   return (
@@ -39,24 +40,38 @@ const App = () => {
           <SplashScreen />
         ) : (
           <Stack.Navigator>
-            {isAuthToken?(<Stack.Screen
-              name="logins"
-              component={Login}
-              options={{ headerShown: false }}
-            />):(<Stack.Screen
-              name="splash"
-              component={Splash}
-              options={{ headerShown: false }}
-            />)}
+            {isAuthToken ? (
+              <Stack.Screen
+                name="admindashboard"
+                component={AdminDashboard}
+                options={{headerShown: false}}
+              />
+            ) : (
+              <Stack.Screen
+                name="splash"
+                component={Splash}
+                options={{headerShown: false}}
+              />
+            )}
             <Stack.Screen
               name="login"
               component={Login}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="signup"
               component={SignUp}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="createRestaurant"
+              component={RestaurantForm}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="createPilot"
+              component={PilotRegister}
+              options={{headerShown: false}}
             />
           </Stack.Navigator>
         )}
@@ -71,7 +86,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'cover', // You can adjust the image style as needed
+    resizeMode: 'cover',
   },
 });
 
