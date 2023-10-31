@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, Animated, Text, Pressable, StatusBar } from "react-native";
+import { View, StyleSheet, Image, Animated, Text, Pressable, StatusBar,ImageBackground } from "react-native";
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { Dimensions } from 'react-native'
 import { colors } from "../../Utility/Colors";
 import Button from "../Button";
+import {styles} from './style'
 
 const { width, height } = Dimensions.get('screen')
 
@@ -30,7 +31,7 @@ const splashData = [{
 }
 ]
 
-const Splash = ({ navigation }) => {
+export const Splash = ({ navigation }) => {
 
 
 
@@ -91,4 +92,15 @@ const Splash = ({ navigation }) => {
     )
 
 }
-export default Splash;
+
+export const SplashScreen = () => {
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          source={require('../../assets/splashscreen.png')} // Replace with the correct image path
+          style={styles.image}
+        />
+      </View>
+    );
+};
+
