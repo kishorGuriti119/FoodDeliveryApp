@@ -16,38 +16,44 @@ import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
 import {useFormik} from 'formik';
 import {ValidateSignUp} from '../../../Validations/InputValidation';
+import axios from 'axios';
 
 const SignUp = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
 
   const navigateToLogin = () => {
     navigation.navigate('login');
   };
 
-  const ValidateMobileNumber = text => {
-    if (text.length <= 10) {
-      setMobileNumber(text);
-      console.log('mobile number validation is triggered');
-    }
-    return;
-  };
-
   const formik = useFormik({
     initialValues: {
       name: '',
-      email: '',
+      emailAddress: '',
       password: '',
-      mobileNumber: '',
+      contactNumber: '',
+      role: 'CUSTOMER',
     },
 
     onSubmit: async values => {
       const {isValid, errors} = await ValidateSignUp(values);
-      if (isValid) {
-        console.log('validations passed');
-        if (!isChecked) {
-          alert('agree Terms and Conditions');
-          setIsChecked(true);
+      if (isValid & !isChecked) {
+        alert('agree Terms and Conditions');
+        setIsChecked(true);
+        return;
+      }
+      if (isValid & isChecked) {
+        try {
+          let {data} = await axios.post(
+            `http://10.0.2.2:8082/api/user/register`,
+            values,
+          );
+
+          console.log(data);
+          alert('user created');
+          navigation.navigate('login');
+        } catch (err) {
+          console.log(err);
         }
       } else {
         formik.setErrors(errors);
@@ -80,20 +86,19 @@ const SignUp = ({navigation}) => {
               label="Email"
               placeholder="example.gamil.com"
               icon={Icons.gmail_fill}
-              onChangeText={formik.handleChange('email')}
+              onChangeText={formik.handleChange('emailAddress')}
             />
-            {formik.touched.email && formik.errors.email ? (
+            {formik.touched.emailAddress && formik.errors.emailAddress ? (
               <Text style={globelstyle.errorText}>{formik.errors.email}</Text>
             ) : null}
             <Input
               isMobileNumber
               label="Mobile number"
-              value={mobileNumber}
-              onChangeText={formik.handleChange('mobileNumber')}
+              onChangeText={formik.handleChange('contactNumber')}
             />
-            {formik.touched.mobileNumber && formik.errors.mobileNumber ? (
+            {formik.touched.contactNumber && formik.errors.contactNumber ? (
               <Text style={globelstyle.errorText}>
-                {formik.errors.mobileNumber}
+                {formik.errors.contactNumber}
               </Text>
             ) : null}
             <Input

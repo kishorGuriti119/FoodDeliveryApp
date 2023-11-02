@@ -13,12 +13,12 @@ export const style = StyleSheet.create({
     alignItems: 'center',
   },
   bottomContainer: {
-    padding:24,
+    padding: 24,
     marginTop: -20,
     backgroundColor: colors.whiteText,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    height: height * 0.55,
+    height: height * 0.6,
   },
   Applogo: {
     height: 87.29,
