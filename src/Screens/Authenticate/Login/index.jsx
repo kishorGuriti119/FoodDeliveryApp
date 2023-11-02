@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -7,18 +7,18 @@ import {
   Image,
   Pressable,
 } from 'react-native';
-import { style } from './style';
-import { globelstyle } from '../../../Utility/GlobelStyles';
-import { Icons } from '../../../Utility/Icons';
+import {style} from './style';
+import {globelstyle} from '../../../Utility/GlobelStyles';
+import {Icons} from '../../../Utility/Icons';
 import Input from '../../../Components/Input';
 import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
-import { useFormik } from 'formik';
-import { ValidateLogin } from '../../../Validations/InputValidation';
+import {useFormik} from 'formik';
+import {ValidateLogin} from '../../../Validations/InputValidation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const formik = useFormik({
@@ -28,44 +28,20 @@ const Login = ({ navigation }) => {
     },
     onSubmit: async values => {
       console.log(values);
-      const { isValid, errors } = await ValidateLogin(values);
+      const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
-        // console.log('login succuss');
-        fetch('http://10.0.2.2:8082/api/user/login', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values)
-        })
-          .then((res) => res.json())
-          .then(async (data) => {
-            const { accessToken, email, refreshToken } = data
-            const token = await AsyncStorage.setItem('token',accessToken)
-            navigation.navigate('secureadmindashboard')
-          //   fetch('', {
-          //     method: "GET",
-          //     headers: {
-          //       'Authorization': `Bearer ${token}`,
-          //       'Content-Type': 'application/json',
-          //     },
-          //   }).then((response) => {
-          //     if (!response.ok) {
-          //       throw new Error(`HTTP error! Status: ${response.status}`);
-          //     }
-          //     return response.json(); // Assuming the response is in JSON format
-          //   })
-          //     .then((data) => {
-          //       // Handle the response data
-          //       console.log('Response Data:', data);
-          //     })
-          //     .catch((error) => {
-          //       // Handle any errors
-          //       console.error('Request Error:', error);
-          //     })
+        try {
+          const {data} = await axios.post(
+            'http://10.0.2.2:8082/api/user/login',
+            values,
+          );
 
-        })
-          .catch((e) => console.log(e))
+          const {accessToken, email, refreshToken} = data;
+          const token = await AsyncStorage.setItem('token', accessToken);
+          navigation.navigate('secureadmindashboard');
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         console.log(errors);
         formik.setErrors(errors);
