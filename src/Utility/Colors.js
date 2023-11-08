@@ -6,5 +6,6 @@ export const colors = {
     whiteText: '#FFFFFF',
     countryCodeBackground: '#F9FAFB',
     countryCodeBorder: '#EAECF0',
+    custominputBorder:'#EAECF0'
   };
   

@@ -1,5 +1,5 @@
 export const Icons = {
-  direction_left:require('../assets/direction_left.png'),
+  direction_left: require('../assets/direction_left.png'),
   user: require('../assets/user.png'),
   gmail_fill: require('../assets/gmail_fill.png'),
   country_code: require('../assets/country_code.png'),
@@ -8,4 +8,8 @@ export const Icons = {
   doodle: require('../assets/doodle.png'),
   eye: require('../assets/eye.png'),
   closed_eye: require('../assets/eye_closed.png'),
+  email_shade: require('../assets/gmail_shade.png'),
+  user_shade: require('../assets/user_shade.png'),
+  country: require('../assets/country.png'),
+  mobile: require('../assets/mobile.png'),
 };

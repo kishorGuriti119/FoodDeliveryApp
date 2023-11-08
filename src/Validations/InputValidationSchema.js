@@ -13,10 +13,34 @@ export const SignUpSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'password must be greater than 7 characters')
     .required('*required'),
-    contactNumber: Yup.string()
+  contactNumber: Yup.string()
     .matches(/^[0-9]{10}$/, 'Invalid mobile number')
     .required('*required'),
 });
 
+export const RestaurantOwnerSchema = Yup.object().shape({
+  ownerName: Yup.string().required('*required'),
+  emailAddress: Yup.string().email('Enter valid Email').required('*required'),
+  password: Yup.string()
+    .min(8, 'password must be greater than 7 characters')
+    .required('*required'),
+  phoneNumber: Yup.string()
+    .matches(/^[0-9]{10}$/, 'Invalid mobile number')
+    .required('*required'),
+});
 
-
+export const RestaurantRegistrationSchema = Yup.object().shape({
+  restaurantName: Yup.string().required('*required'),
+  address: Yup.object().shape({
+    locality: Yup.string().required('*required'),
+    city: Yup.string().required('City is required'),
+    pincode: Yup.string()
+      .matches(/^[0-9]{6}$/, 'Invalid pincode')
+      .required('Pincode is required'),
+    district: Yup.string().required('District is required'),
+    state: Yup.string().required('Select state'),
+    country: Yup.string()
+      .matches(/^(INDIA)$/i, 'Invalid country')
+      .required('Country is required'),
+  }),
+});

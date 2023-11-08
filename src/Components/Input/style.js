@@ -15,6 +15,7 @@ export const style = StyleSheet.create({
   InputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 0,
     borderBottomWidth: 1,
     borderColor: colors.secondary,
   },

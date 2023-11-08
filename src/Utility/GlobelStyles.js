@@ -6,6 +6,6 @@ export const globelstyle = StyleSheet.create({
     color: colors.primary,
     fontSize: 12,
     fontWeight: '700',
-    marginTop: -3,
+    marginTop:-8,
   },
 });

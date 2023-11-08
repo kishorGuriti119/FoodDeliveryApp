@@ -1,12 +1,33 @@
-import React from 'react';
-import { Text, View, SafeAreaView, ImageBackground, Pressable, BackHandler, } from 'react-native';
-import { style } from './style';
-import { Icons } from '../../../../Utility/Icons';
+import React, {useEffect} from 'react';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ImageBackground,
+  Pressable,
+  BackHandler,
+} from 'react-native';
+import {style} from './style';
+import {Icons} from '../../../../Utility/Icons';
 import Button from '../../../../Components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const AdminDashboard = ({navigation}) => {
+  let token;
+  useEffect(() => {
+    getToken();
+  }, []);
 
-const AdminDashboard = ({ navigation }) => {
+  const getToken = async () => {
+    token = await AsyncStorage.getItem('token');
+    console.log(token, 'this is token from admindashboard');
+    if (token !== null) {
+      setIsTrue(true);
+    } else {
+      setIsTrue(false);
+    }
+  };
+
   const navigetToRestarauantForm = () => {
     navigation.navigate('createRestaurant');
   };
@@ -45,9 +66,9 @@ const AdminDashboard = ({ navigation }) => {
               />
               <Button
                 title="Logout"
-                onPress={async ()=>{
-                  await AsyncStorage.removeItem('token')
-                  navigation.navigate('login')
+                onPress={async () => {
+                  await AsyncStorage.removeItem('token');
+                  navigation.navigate('login');
                 }}
               />
             </View>
