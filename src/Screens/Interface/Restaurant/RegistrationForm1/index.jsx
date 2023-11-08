@@ -23,7 +23,7 @@ const RestaurantForm1 = ({navigation}) => {
       ownerName: '',
       emailAddress: '',
       password: '',
-      phoneNumber: '',
+      contactNumber: '',
     },
 
     onSubmit: async values => {
@@ -70,11 +70,11 @@ const RestaurantForm1 = ({navigation}) => {
             ismobile
             placeholder=""
             icon={Icons.mobile}
-            onChangeText={formik.handleChange('phoneNumber')}
+            onChangeText={formik.handleChange('contactNumber')}
           />
-          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          {formik.touched.contactNumber && formik.errors.contactNumber ? (
             <Text style={globelstyle.errorText}>
-              {formik.errors.phoneNumber}
+              {formik.errors.contactNumber}
             </Text>
           ) : null}
 
@@ -96,4 +96,4 @@ const RestaurantForm1 = ({navigation}) => {
   );
 };
 
-export default RestaurantForm1;
+export default React.memo(RestaurantForm1);
