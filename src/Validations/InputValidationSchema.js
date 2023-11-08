@@ -24,7 +24,7 @@ export const RestaurantOwnerSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'password must be greater than 7 characters')
     .required('*required'),
-  phoneNumber: Yup.string()
+    contactNumber: Yup.string()
     .matches(/^[0-9]{10}$/, 'Invalid mobile number')
     .required('*required'),
 });

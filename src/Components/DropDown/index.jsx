@@ -19,4 +19,4 @@ const DropDown = ({onChangeText = () => {}}) => {
   );
 };
 
-export default DropDown;
+export default React.memo(DropDown);

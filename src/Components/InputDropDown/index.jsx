@@ -5,7 +5,7 @@ import {style} from './style';
 
 const DropdownComponent = ({data, label, value, onValueChange}) => {
   return (
-    <Pressable>
+    <Pressable hitSlop={20}>
       {label ? <Text style={style.labelStyle}>{label}</Text> : null}
       <Dropdown
         style={style.dropdown}

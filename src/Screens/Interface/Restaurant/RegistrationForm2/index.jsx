@@ -13,7 +13,7 @@ import {globelstyle} from '../../../../Utility/GlobelStyles';
 
 const RestaurantForm2 = ({navigation}) => {
   const route = useRoute();
-  const {ownerName, emailAddress, password, phoneNumber} = route.params;
+  const {ownerName, emailAddress, password, contactNumber} = route.params;
   const [FormErrors, setFormErrors] = useState({});
 
   const formik = useFormik({
@@ -21,7 +21,7 @@ const RestaurantForm2 = ({navigation}) => {
       ownerName: ownerName,
       email: emailAddress,
       password: password,
-      phoneNumber: phoneNumber,
+      contactNumber: contactNumber,
       restaurantName: '',
       address: {
         locality: '',
@@ -151,4 +151,4 @@ const RestaurantForm2 = ({navigation}) => {
   );
 };
 
-export default RestaurantForm2;
+export default React.memo(RestaurantForm2);
