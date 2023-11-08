@@ -8,6 +8,7 @@ import AdminDashboard from '../../Interface/Admin/Dashboard';
 import RestaurantForm from '../../Interface/Restaurant/Register';
 import PilotRegister from '../../Interface/Pilot/Register';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DashboardNavigations from '../../../Navigations/DashboardNavigations';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,9 +16,11 @@ const Navigations = () => {
   const [showSplash, setShowSplash] = useState(true);
   const [istrue, setIsTrue] = useState();
 
+  let token;
+
   const getToken = async () => {
-    const token = await AsyncStorage.getItem('token');
-    console.log(token);
+    token = await AsyncStorage.getItem('token');
+    console.log(token, 'secure navigations');
     if (token !== null) {
       setIsTrue(true);
     } else {
@@ -38,9 +41,10 @@ const Navigations = () => {
       ) : (
         <Stack.Navigator>
           <Stack.Screen
-            name="admindashboard"
-            component={istrue ? AdminDashboard : Splash}
+            name="dashboard"
+            component={istrue ? DashboardNavigations : Splash}
             options={{headerShown: false}}
+            initialParams={{token: token}}
           />
 
           <Stack.Screen

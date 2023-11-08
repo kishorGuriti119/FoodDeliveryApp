@@ -27,7 +27,6 @@ const Login = ({navigation}) => {
       password: '',
     },
     onSubmit: async values => {
-      console.log(values);
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
         try {
@@ -35,7 +34,7 @@ const Login = ({navigation}) => {
             'http://10.0.2.2:8082/api/user/login',
             values,
           );
-
+          console.log(data);
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           navigation.navigate('secureadmindashboard');

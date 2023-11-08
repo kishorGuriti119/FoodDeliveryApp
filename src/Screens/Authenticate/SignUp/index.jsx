@@ -7,6 +7,7 @@ import {
   Pressable,
   ImageBackground,
   SafeAreaView,
+  ToastAndroid,
 } from 'react-native';
 import {style} from './style';
 import {globelstyle} from '../../../Utility/GlobelStyles';
@@ -49,8 +50,7 @@ const SignUp = ({navigation}) => {
             values,
           );
 
-          console.log(data);
-          alert('user created');
+          ToastAndroid.show('user created', ToastAndroid.SHORT);
           navigation.navigate('login');
         } catch (err) {
           console.log(err);
@@ -89,7 +89,9 @@ const SignUp = ({navigation}) => {
               onChangeText={formik.handleChange('emailAddress')}
             />
             {formik.touched.emailAddress && formik.errors.emailAddress ? (
-              <Text style={globelstyle.errorText}>{formik.errors.email}</Text>
+              <Text style={globelstyle.errorText}>
+                {formik.errors.emailAddress}
+              </Text>
             ) : null}
             <Input
               isMobileNumber
@@ -102,7 +104,7 @@ const SignUp = ({navigation}) => {
               </Text>
             ) : null}
             <Input
-              label="password"
+              label="Password"
               isPassword
               placeholder="set password"
               onChangeText={formik.handleChange('password')}

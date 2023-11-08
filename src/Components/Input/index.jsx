@@ -46,6 +46,7 @@ const Input = ({
   icon,
   isPassword,
   placeholder,
+  customStyle,
   onChangeText = () => {},
   isMobileNumber,
   value = '',
