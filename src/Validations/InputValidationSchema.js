@@ -44,3 +44,7 @@ export const RestaurantRegistrationSchema = Yup.object().shape({
       .required('Country is required'),
   }),
 });
+
+export const ForgotPasswordSchema = Yup.object().shape({
+  emailAddress: Yup.string().email('Enter valid Email').required('Enter Email'),
+});

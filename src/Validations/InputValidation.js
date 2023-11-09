@@ -2,6 +2,8 @@ import {LoginSchema} from './InputValidationSchema';
 import {SignUpSchema} from './InputValidationSchema';
 import {RestaurantRegistrationSchema} from './InputValidationSchema';
 import { RestaurantOwnerSchema } from './InputValidationSchema';
+import { ForgotPasswordSchema } from './InputValidationSchema';
+
 
 export const ValidateLogin = async values => {
   try {
@@ -46,6 +48,19 @@ export const validateRestaurantOwnerRegistration = async values => {
 export const Validate_restaurant_Registration = async values => {
   try {
     await RestaurantRegistrationSchema.validate(values, {abortEarly: false});
+    return {isValid: true, errors: {}};
+  } catch (errors) {
+    const validationErrors = {};
+    errors.inner.forEach(error => {
+      validationErrors[error.path] = error.message;
+    });
+    return {isValid: false, errors: validationErrors};
+  }
+};
+
+export const ValidateForgotPassword = async values => {
+  try {
+    await ForgotPasswordSchema.validate(values, {abortEarly: false});
     return {isValid: true, errors: {}};
   } catch (errors) {
     const validationErrors = {};

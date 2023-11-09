@@ -10,6 +10,8 @@ import PilotRegister from '../../Interface/Pilot/Register';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DashboardNavigations from '../../../Navigations/DashboardNavigations';
 import {jwtDecode} from 'jwt-decode';
+import ForgotPassword from '../ForgotPassword';
+import ResetPassword from '../ResetPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +70,17 @@ const Navigations = () => {
             component={SignUp}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="forgotpassword"
+            component={ForgotPassword}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="resetpassword"
+            component={ResetPassword}
+            options={{headerShown: false}}
+          />
+
           <Stack.Screen
             name="createRestaurant"
             component={RestaurantForm}
