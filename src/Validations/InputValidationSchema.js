@@ -24,7 +24,7 @@ export const RestaurantOwnerSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'password must be greater than 7 characters')
     .required('*required'),
-    contactNumber: Yup.string()
+  contactNumber: Yup.string()
     .matches(/^[0-9]{10}$/, 'Invalid mobile number')
     .required('*required'),
 });
@@ -47,4 +47,12 @@ export const RestaurantRegistrationSchema = Yup.object().shape({
 
 export const ForgotPasswordSchema = Yup.object().shape({
   emailAddress: Yup.string().email('Enter valid Email').required('Enter Email'),
+});
+
+export const ResetPasswordSchema = Yup.object().shape({
+  email: Yup.string().email('Enter valid Email').required('Enter Email'),
+  changePasswordId: Yup.string().required('*required'),
+  newPassword: Yup.string()
+    .min(8, 'password must be greater than 7 characters')
+    .required('please set new passsword'),
 });

@@ -18,7 +18,6 @@ import {validateRestaurantOwnerRegistration} from '../../../../Validations/Input
 import {globelstyle} from '../../../../Utility/GlobelStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const RestaurantForm1 = ({navigation}) => {
   const formik = useFormik({
     initialValues: {
@@ -43,8 +42,17 @@ const RestaurantForm1 = ({navigation}) => {
 
   return (
     <ScrollView>
-      <SafeAreaView style={style.container}>
-        <Text style={style.title}>Create Restaurant</Text>
+      <View style={style.container}>
+        <View style={style.header}>
+          <Pressable
+            hitSlop={20}
+            style={style.backArrowContainer}
+            onPress={() => navigation.goBack()}>
+            <Image source={Icons.direction_left} style={style.backArrow} />
+          </Pressable>
+          <Text style={style.title}>Create Restaurant</Text>
+          <View></View>
+        </View>
 
         <View style={style.inputfieldsContainer}>
           <ProfileInput
@@ -100,7 +108,7 @@ const RestaurantForm1 = ({navigation}) => {
             navigation.navigate('login');
           }}
         />
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   View,
@@ -8,19 +8,19 @@ import {
   Pressable,
   ToastAndroid,
 } from 'react-native';
-import { style } from './style';
-import { globelstyle } from '../../../Utility/GlobelStyles';
-import { Icons } from '../../../Utility/Icons';
+import {style} from './style';
+import {globelstyle} from '../../../Utility/GlobelStyles';
+import {Icons} from '../../../Utility/Icons';
 import Input from '../../../Components/Input';
 import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
-import { useFormik } from 'formik';
-import { ValidateLogin } from '../../../Validations/InputValidation';
+import {useFormik} from 'formik';
+import {ValidateLogin} from '../../../Validations/InputValidation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const getRoleofTheUser = async token => {
@@ -35,24 +35,27 @@ const Login = ({ navigation }) => {
       password: '',
     },
     onSubmit: async values => {
-      const { isValid, errors } = await ValidateLogin(values);
+      const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
         try {
-          const { data } = await axios.post(
+          const {data} = await axios.post(
             'http://10.0.2.2:8082/api/user/login',
             values,
           );
 
-          const { accessToken, email, refreshToken } = data;
+          const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           let role = await getRoleofTheUser(accessToken);
 
-          let userData = { token: accessToken, role: role };
+          let userData = {token: accessToken, role: role};
 
           navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
           if (error.code === 'ECONNABORTED') {
-            ToastAndroid.show("Request timed out Try Again", ToastAndroid.SHORT)
+            ToastAndroid.show(
+              'Request timed out Try Again',
+              ToastAndroid.SHORT,
+            );
           }
         }
       } else {

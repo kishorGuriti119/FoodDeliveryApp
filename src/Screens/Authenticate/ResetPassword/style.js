@@ -1,16 +1,23 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
+import {colors} from '../../../Utility/Colors';
 
 export const styles = StyleSheet.create({
-    container: {
-        width:'100%',
-        padding:20,
-        justifyContent:"center",
-        alignItems:"center",
-        marginTop:50
-    },
-    formContainer:{
-        width:'100%',
-        marginTop:20,
-        padding:30
-    }
-})
+  container: {
+    padding: 24,
+  },
+  formContainer: {
+    marginTop: 20,
+  },
+  backArrowContainer: {
+    backgroundColor: colors.secondary,
+    width: 30,
+    height: 30,
+    padding: 10,
+    borderRadius: 100,
+    marginBottom: 50,
+  },
+  backArrow: {
+    height: 11.5,
+    width: 5.5,
+  },
+});

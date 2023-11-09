@@ -4,6 +4,22 @@ import {colors} from '../../../../Utility/Colors';
 const {width, height} = Dimensions.get('window');
 
 export const style = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  backArrowContainer: {
+    backgroundColor: colors.secondary,
+    width: 30,
+    height: 30,
+    padding: 10,
+    borderRadius: 100,
+  },
+  backArrow: {
+    height: 11.5,
+    width: 5.5,
+  },
   container: {
     padding: 24,
     height: height,
