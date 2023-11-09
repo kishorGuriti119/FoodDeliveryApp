@@ -16,6 +16,8 @@ import {Icons} from '../../../../Utility/Icons';
 import {useFormik} from 'formik';
 import {validateRestaurantOwnerRegistration} from '../../../../Validations/InputValidation';
 import {globelstyle} from '../../../../Utility/GlobelStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const RestaurantForm1 = ({navigation}) => {
   const formik = useFormik({
@@ -91,6 +93,13 @@ const RestaurantForm1 = ({navigation}) => {
         <View style={style.buttonContainer}>
           <Button title="Next" onPress={formik.handleSubmit} />
         </View>
+        <Button
+          title="Logout"
+          onPress={async () => {
+            await AsyncStorage.removeItem('token');
+            navigation.navigate('login');
+          }}
+        />
       </SafeAreaView>
     </ScrollView>
   );

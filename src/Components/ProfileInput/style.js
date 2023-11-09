@@ -31,6 +31,7 @@ export const style = StyleSheet.create({
   },
   inputbox: {
     flex: 1,
+    color: colors.secondary,
   },
   disabled: {
     backgroundColor: colors.custominputBorder,

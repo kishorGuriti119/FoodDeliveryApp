@@ -21,7 +21,6 @@ import axios from 'axios';
 
 const SignUp = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [contactNumber, setContactNumber] = useState('');
 
   const navigateToLogin = () => {
     navigation.navigate('login');

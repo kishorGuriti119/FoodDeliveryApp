@@ -10,6 +10,7 @@ import {states} from '../../../../Utility/states';
 import {useFormik} from 'formik';
 import {Validate_restaurant_Registration} from '../../../../Validations/InputValidation';
 import {globelstyle} from '../../../../Utility/GlobelStyles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RestaurantForm2 = ({navigation}) => {
   const route = useRoute();
@@ -147,6 +148,13 @@ const RestaurantForm2 = ({navigation}) => {
         )}
         <Button title="Create Restaurant" onPress={formik.handleSubmit} />
       </View>
+      <Button
+        title="Logout"
+        onPress={async () => {
+          await AsyncStorage.removeItem('token');
+          navigation.navigate('login');
+        }}
+      />
     </ScrollView>
   );
 };
