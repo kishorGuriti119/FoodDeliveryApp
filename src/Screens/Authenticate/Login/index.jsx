@@ -17,9 +17,16 @@ import {useFormik} from 'formik';
 import {ValidateLogin} from '../../../Validations/InputValidation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
 const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const getRoleofTheUser = async token => {
+    let decoded = jwtDecode(token);
+    const roles = decoded.roles;
+    return roles[0];
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -34,10 +41,14 @@ const Login = ({navigation}) => {
             'http://10.0.2.2:8082/api/user/login',
             values,
           );
-          console.log(data);
+
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
-          navigation.navigate('secureadmindashboard');
+          let role = await getRoleofTheUser(accessToken);
+
+          let userData = {token: accessToken, role: role};
+
+          navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
           console.log(error);
         }

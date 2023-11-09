@@ -1,6 +1,7 @@
 import React from 'react';
 import {Pressable, Text, TextInput, View, Image} from 'react-native';
 import {style} from './style';
+import {colors} from '../../Utility/Colors';
 
 const ProfileInput = ({
   label,
@@ -33,6 +34,7 @@ const ProfileInput = ({
           ) : (
             <TextInput
               placeholder={placeholder}
+              placeholderTextColor={colors.placeholderTextColor}
               onChangeText={onChangeText}
               secureTextEntry={isPassword}
               keyboardType={ispincode ? 'numeric' : 'default'}

@@ -13,20 +13,20 @@ import Button from '../../../../Components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AdminDashboard = ({navigation}) => {
-  let token;
-  useEffect(() => {
-    getToken();
-  }, []);
+  // let token;
+  // useEffect(() => {
+  //   getToken();
+  // }, []);
 
-  const getToken = async () => {
-    token = await AsyncStorage.getItem('token');
-    console.log(token, 'this is token from admindashboard');
-    if (token !== null) {
-      setIsTrue(true);
-    } else {
-      setIsTrue(false);
-    }
-  };
+  // const getToken = async () => {
+  //   token = await AsyncStorage.getItem('token');
+  //   console.log(token, 'this is token from admindashboard');
+  //   if (token !== null) {
+  //     setIsTrue(true);
+  //   } else {
+  //     setIsTrue(false);
+  //   }
+  // };
 
   const navigetToRestarauantForm = () => {
     navigation.navigate('createRestaurant');

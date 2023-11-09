@@ -1,45 +1,8 @@
-// import React from 'react';
-// import {Pressable, Text, TextInput, View, Image} from 'react-native';
-// import {style} from './style';
-
-// const Input = ({
-//   label,
-//   icon,
-//   placeholder,
-//   onChangeText = () => {},
-//   isMobileNumber,
-// }) => {
-//   return (
-//     <View style={style.Container}>
-//       {label ? <Text style={style.lableText}>{label}</Text> : null}
-//       <Pressable style={style.InputContainer}>
-//         {icon ? (
-//           <View>
-//             <Image source={icon} style={style.InputIcon} />
-//           </View>
-//         ) : null}
-//         {!isMobileNumber ? (
-//           <TextInput placeholder={placeholder} style={style.input} />
-//         ) : (
-//           <View>
-//             <TextInput
-//               placeholder={placeholder}
-//               keyboardType="numeric"
-//               style={style.input}
-//             />
-//           </View>
-//         )}
-//       </Pressable>
-//     </View>
-//   );
-// };
-
-// export default Input;
-
 import React from 'react';
 import {Pressable, Text, TextInput, View, Image} from 'react-native';
 import {style} from './style';
 import DropDown from '../DropDown';
+import {colors} from '../../Utility/Colors';
 
 const Input = ({
   label,
@@ -65,6 +28,7 @@ const Input = ({
         {!isMobileNumber ? (
           <TextInput
             placeholder={placeholder}
+            placeholderTextColor={colors.placeholderTextColor}
             style={style.input}
             onChangeText={onChangeText}
             secureTextEntry={isPassword}
@@ -72,6 +36,7 @@ const Input = ({
         ) : (
           <TextInput
             placeholder={placeholder}
+            placeholderTextColor={colors.placeholderTextColor}
             keyboardType="numeric"
             style={style.input}
             onChangeText={onChangeText}

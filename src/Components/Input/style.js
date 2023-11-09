@@ -27,5 +27,6 @@ export const style = StyleSheet.create({
   },
   input: {
     flex: 1,
+    color: colors.secondary,
   },
 });

@@ -5,64 +5,35 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {jwtDecode} from 'jwt-decode';
 import CustomerLandingPage from '../../Screens/Interface/Customer/CustomerLandingPage';
+import RestaurantForm from '../../Screens/Interface/Restaurant/Register';
+import {useRoute} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 const DashboardNavigations = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [role, setRole] = useState('');
-  let token;
-  useEffect(() => {
-    getToken();
-  }, []);
-
-  const myFUNCTION = async () => {
-    let token = await AsyncStorage.getItem('token');
-    return token;
-  };
-
-  const getToken = async () => {
-    token = await myFUNCTION();
-    console.log(token, 'this is token from dashboard');
-    if (token) {
-      let decoded = jwtDecode(token);
-      console.log(decoded, 'decoded');
-      const roles = decoded.roles;
-      setRole(roles[0]);
-    }
-    setIsLoading(false);
-  };
+  const route = useRoute();
+  const {token, role} = route.params;
+  console.log(token, role, 'from dashboardnavigations');
 
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="admindashboard"
-        component={AdminDashboard}
+        component={
+          role === 'ADMIN'
+            ? AdminDashboard
+            : role === 'CUSTOMER'
+            ? CustomerLandingPage
+            : RestaurantForm
+        }
         options={{headerShown: false}}
       />
 
-
-<Stack.Screen name="restaurantform1" options={{headerShown: false}}>
-        {props => (
-          <RestaurantForm1
-            {...props}
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            contactNumber={contactNumber}
-            setRestaurantName={setRestaurantName}
-          />
-        )}
-      </Stack.Screen>
-
-
-
-
-
-
+      <Stack.Screen
+        name="restaurantform"
+        component={RestaurantForm}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

@@ -9,28 +9,39 @@ import RestaurantForm from '../../Interface/Restaurant/Register';
 import PilotRegister from '../../Interface/Pilot/Register';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DashboardNavigations from '../../../Navigations/DashboardNavigations';
+import {jwtDecode} from 'jwt-decode';
 
 const Stack = createNativeStackNavigator();
 
 const Navigations = () => {
   const [showSplash, setShowSplash] = useState(true);
-  const [istrue, setIsTrue] = useState();
+  const [isTokenAvailable, setToakenAvailable] = useState();
+  const [loggedInUserRole, setLoggedInUserRole] = useState();
 
   let token;
 
-  const getToken = async () => {
-    token = await AsyncStorage.getItem('token');
-    console.log(token, 'secure navigations');
-    if (token !== null) {
-      setIsTrue(true);
-    } else {
-      setIsTrue(false);
-    }
-  };
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
     }, 1000);
+
+    const getRole = async token => {
+      let decoded = jwtDecode(token);
+      const roles = decoded.roles;
+      console.log('roles', roles);
+      return roles[0];
+    };
+
+    const getToken = async () => {
+      token = await AsyncStorage.getItem('token');
+      if (token !== null) {
+        setToakenAvailable(true);
+        let role = await getRole(token);
+        setLoggedInUserRole(role);
+      } else {
+        setToakenAvailable(false);
+      }
+    };
     getToken();
   }, []);
 
@@ -42,7 +53,7 @@ const Navigations = () => {
         <Stack.Navigator>
           <Stack.Screen
             name="dashboard"
-            component={istrue ? DashboardNavigations : Splash}
+            component={isTokenAvailable ? DashboardNavigations : Splash}
             options={{headerShown: false}}
             initialParams={{token: token}}
           />
@@ -67,9 +78,10 @@ const Navigations = () => {
             component={PilotRegister}
             options={{headerShown: false}}
           />
+
           <Stack.Screen
-            name="secureadmindashboard"
-            component={AdminDashboard}
+            name="dashboardNavigations"
+            component={DashboardNavigations}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
