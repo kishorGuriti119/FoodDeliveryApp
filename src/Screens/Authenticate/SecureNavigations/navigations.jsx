@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../Login';
 import SignUp from '../SignUp';
 import {Splash, SplashScreen} from '../../../Components/Splash';
-import AdminDashboard from '../../Interface/Admin/Dashboard';
+import AdminDashboard from '../../Interface/Admin/Admin_Home';
 import RestaurantForm from '../../Interface/Restaurant/Register';
 import PilotRegister from '../../Interface/Pilot/Register';
 import AsyncStorage from '@react-native-async-storage/async-storage';
