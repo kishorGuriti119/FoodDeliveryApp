@@ -12,22 +12,7 @@ import {Icons} from '../../../../Utility/Icons';
 import Button from '../../../../Components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AdminDashboard = ({navigation}) => {
-  // let token;
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
-
-  // const getToken = async () => {
-  //   token = await AsyncStorage.getItem('token');
-  //   console.log(token, 'this is token from admindashboard');
-  //   if (token !== null) {
-  //     setIsTrue(true);
-  //   } else {
-  //     setIsTrue(false);
-  //   }
-  // };
-
+const Admin_Home = ({navigation}) => {
   const navigetToRestarauantForm = () => {
     navigation.navigate('createRestaurant');
   };
@@ -64,13 +49,6 @@ const AdminDashboard = ({navigation}) => {
                 title="Add Deliver Agent"
                 onPress={navigetToCreatePilot}
               />
-              <Button
-                title="Logout"
-                onPress={async () => {
-                  await AsyncStorage.removeItem('token');
-                  navigation.navigate('login');
-                }}
-              />
             </View>
           </ImageBackground>
         </View>
@@ -79,4 +57,4 @@ const AdminDashboard = ({navigation}) => {
   );
 };
 
-export default AdminDashboard;
+export default Admin_Home;
