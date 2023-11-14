@@ -15,9 +15,9 @@ const Stack = createNativeStackNavigator();
 
 const DashboardNavigations = () => {
   const route = useRoute();
-  const {token, role} = route.params;
-  let [UserRole, setUserRole] = useState(role);
+  const {role} = route.params;
 
+  let [UserRole, setUserRole] = useState(role);
   let Storedtoken;
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const DashboardNavigations = () => {
 
     const getToken = async () => {
       Storedtoken = await AsyncStorage.getItem('token');
-      if (token !== null) {
+      if (Storedtoken !== null) {
         let role = await getRole(Storedtoken);
         setUserRole(role);
       }

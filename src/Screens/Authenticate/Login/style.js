@@ -72,4 +72,21 @@ export const style = StyleSheet.create({
     color: colors.primary,
     textDecorationLine: 'underline',
   },
+  googleSignContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 24,
+  },
+  googleSignText: {
+    color: colors.primary,
+    fontWeight: '700',
+    fontSize: 12,
+    fontFamily: 'Plus Jakarta Sans',
+  },
+  google: {
+    height: 24,
+    width: 24,
+    marginHorizontal: 8,
+  },
 });
