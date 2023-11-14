@@ -11,6 +11,7 @@ import {useFormik} from 'formik';
 import {Validate_restaurant_Registration} from '../../../../Validations/InputValidation';
 import {globelstyle} from '../../../../Utility/GlobelStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const RestaurantForm2 = ({navigation}) => {
   const route = useRoute();
@@ -39,6 +40,14 @@ const RestaurantForm2 = ({navigation}) => {
       const {isValid, errors} = await Validate_restaurant_Registration(values);
       if (isValid) {
         console.log(values);
+        try {
+          const {data} = await axios.post(
+            'http://10.0.2.2:8082/api/restaurant/restaurant',
+          );
+          console.log(data, 'restaurant added');
+        } catch (error) {
+          console.log(error);
+        }
       }
       if (errors) {
         formik.setErrors(errors);

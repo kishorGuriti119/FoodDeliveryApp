@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   View,
@@ -19,14 +19,42 @@ import {ValidateLogin} from '../../../Validations/InputValidation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
+import {SignInwithGoogle} from '../../../Config/Firebase/GoogleSignIn';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  // useEffect(() => {
+  //   const signOut = async () => {
+  //     try {
+  //       await GoogleSignin.revokeAccess();
+  //       await GoogleSignin.signOut();
+  //       console.log('log out');
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   signOut();
+  // }, []);
 
   const getRoleofTheUser = async token => {
     let decoded = jwtDecode(token);
     const roles = decoded.roles;
     return roles[0];
+  };
+
+  const OnGoogleSignIn = async () => {
+    SignInwithGoogle().then(data => {
+      if (!data) {
+        console.log('error');
+        return;
+      }
+      const {user} = data;
+      user.role = 'CUSTOMER';
+      navigation.navigate('dashboardNavigations', user);
+      console.log(user, 'from login');
+    });
   };
 
   const formik = useFormik({
@@ -35,14 +63,17 @@ const Login = ({navigation}) => {
       password: '',
     },
     onSubmit: async values => {
+      console.log(values);
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
+        console.log(values);
         try {
           const {data} = await axios.post(
             'http://10.0.2.2:8082/api/user/login',
             values,
           );
 
+          console.log(data);
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           let role = await getRoleofTheUser(accessToken);
@@ -51,6 +82,7 @@ const Login = ({navigation}) => {
 
           navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
+          console.log(error);
           if (error.code === 'ECONNABORTED') {
             ToastAndroid.show(
               'Request timed out Try Again',
@@ -127,6 +159,10 @@ const Login = ({navigation}) => {
               Sign-up
             </Text>
           </Text>
+          <Pressable style={style.googleSignContainer} onPress={OnGoogleSignIn}>
+            <Text style={style.googleSignText}>Sign in with Google</Text>
+            <Image source={Icons.google} style={style.google} />
+          </Pressable>
         </ScrollView>
       </ScrollView>
     </SafeAreaView>
