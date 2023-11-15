@@ -71,11 +71,11 @@ const Login = ({navigation}) => {
         console.log(values);
         try {
           const {data} = await axios.post(
-            'http://10.0.2.2:8082/api/user/login',
+            'http://10.0.2.2:8081/api/user/login',
             values,
           );
 
-          console.log(data);
+          // console.log(data);
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           let role = await getRoleofTheUser(accessToken);

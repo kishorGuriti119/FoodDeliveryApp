@@ -54,8 +54,9 @@ const RestaurantForm2 = ({navigation}) => {
         console.log(values);
         try {
           const {data} = await axios.post(
-            'http://10.0.2.2:8083/api/restaurant/restaurant',
-            {}, // Add an empty object or provide the data you want to send
+            'http://10.0.2.2:8082/api/restaurant/restaurant',
+            values,
+
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -66,7 +67,7 @@ const RestaurantForm2 = ({navigation}) => {
 
           console.log(data, 'restaurant added');
         } catch (error) {
-          console.log(error);
+          console.log(error.message);
         }
       }
       if (errors) {

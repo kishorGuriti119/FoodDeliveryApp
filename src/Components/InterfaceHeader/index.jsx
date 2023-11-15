@@ -60,4 +60,4 @@ const InterfaceHeader = ({
   );
 };
 
-export default InterfaceHeader;
+export default React.memo(InterfaceHeader);

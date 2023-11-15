@@ -37,7 +37,7 @@ const ResetPassword = ({navigation}) => {
         try {
           setIsLoading(true);
           const {data} = await axios.post(
-            `http://10.0.2.2:8082/api/user/resetpassword`,
+            `http://10.0.2.2:8081/api/user/resetpassword`,
             values,
           );
           console.log(data);
