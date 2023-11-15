@@ -45,7 +45,7 @@ const SignUp = ({navigation}) => {
       if (isValid & isChecked) {
         try {
           let {data} = await axios.post(
-            `http://10.0.2.2:8082/api/user/register`,
+            `http://10.0.2.2:8081/api/user/register`,
             values,
           );
 

@@ -34,7 +34,7 @@ const ForgotPassword = ({navigation}) => {
           setIsLoading(true);
           await axios
             .post(
-              `http://10.0.2.2:8082/api/user/forgotpassword?loginId=${values.emailAddress}`,
+              `http://10.0.2.2:8081/api/user/forgotpassword?loginId=${values.emailAddress}`,
             )
             .then(res => {
               if (res.status === 200) {
