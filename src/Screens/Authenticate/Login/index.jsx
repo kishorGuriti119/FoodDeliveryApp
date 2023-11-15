@@ -21,6 +21,8 @@ import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import {SignInwithGoogle} from '../../../Config/Firebase/GoogleSignIn';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {decode} from 'base-64'
+global.atob = decode
 
 const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
