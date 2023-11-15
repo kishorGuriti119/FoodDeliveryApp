@@ -60,6 +60,9 @@ const CustomerLandingPage = () => {
           paddingVertical: 12,
           paddingBottom: 12,
         },
+        tabBarLabelStyle: {
+          color: 'gray',
+        },
       })}>
       <Tab.Screen name="Home" component={Customer_Home} />
       <Tab.Screen name="Orders" component={Customer_Orders} />

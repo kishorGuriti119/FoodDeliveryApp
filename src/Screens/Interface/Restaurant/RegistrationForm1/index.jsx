@@ -58,7 +58,7 @@ const RestaurantForm1 = ({navigation}) => {
           <ProfileInput
             label="owner name"
             placeholder=""
-            icon={Icons.user_shade}
+            icon={Icons.user}
             onChangeText={formik.handleChange('ownerName')}
           />
           {formik.touched.ownerName && formik.errors.ownerName ? (
@@ -67,7 +67,7 @@ const RestaurantForm1 = ({navigation}) => {
           <ProfileInput
             label="email"
             placeholder=""
-            icon={Icons.email_shade}
+            icon={Icons.email}
             onChangeText={formik.handleChange('emailAddress')}
           />
           {formik.touched.emailAddress && formik.errors.emailAddress ? (

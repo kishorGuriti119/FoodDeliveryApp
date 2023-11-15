@@ -75,7 +75,7 @@ const SignUp = ({navigation}) => {
             <Input
               label="Full name"
               placeholder="Enter Fullname"
-              icon={Icons.user}
+              icon={Icons.user_shade}
               onChangeText={formik.handleChange('name')}
             />
             {formik.touched.name && formik.errors.name ? (

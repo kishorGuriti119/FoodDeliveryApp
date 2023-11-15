@@ -17,6 +17,19 @@ const RestaurantForm2 = ({navigation}) => {
   const route = useRoute();
   const {ownerName, emailAddress, password, contactNumber} = route.params;
   const [FormErrors, setFormErrors] = useState({});
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const getToken = async () => {
+      let Storedtoken = await AsyncStorage.getItem('token');
+      console.log(Storedtoken);
+      if (Storedtoken !== null) {
+        setToken(Storedtoken);
+        console.log(token);
+      }
+    };
+    getToken();
+  }, [token]);
 
   const formik = useFormik({
     initialValues: {
@@ -36,14 +49,21 @@ const RestaurantForm2 = ({navigation}) => {
     },
 
     onSubmit: async values => {
-      console.log(values.address);
       const {isValid, errors} = await Validate_restaurant_Registration(values);
       if (isValid) {
         console.log(values);
         try {
           const {data} = await axios.post(
-            'http://10.0.2.2:8082/api/restaurant/restaurant',
+            'http://10.0.2.2:8083/api/restaurant/restaurant',
+            {}, // Add an empty object or provide the data you want to send
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+            },
           );
+
           console.log(data, 'restaurant added');
         } catch (error) {
           console.log(error);
