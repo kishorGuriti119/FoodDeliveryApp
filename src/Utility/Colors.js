@@ -8,4 +8,5 @@ export const colors = {
   countryCodeBorder: '#EAECF0',
   custominputBorder: '#EAECF0',
   placeholderTextColor: '#BDC3C3',
+  orderpage_location_background: '#FFFFFF66',
 };
