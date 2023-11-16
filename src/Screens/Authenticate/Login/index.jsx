@@ -21,8 +21,8 @@ import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import {SignInwithGoogle} from '../../../Config/Firebase/GoogleSignIn';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {decode} from 'base-64'
-global.atob = decode
+import {decode} from 'base-64';
+global.atob = decode;
 
 const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -133,7 +133,7 @@ const Login = ({navigation}) => {
               placeholder="Enter Password"
               onChangeText={formik.handleChange('password')}
               value={formik.values.password}
-              icon={Icons.closed_eye}
+              icon={Icons.eye}
             />
             {formik.touched.password && formik.errors.password ? (
               <Text style={globelstyle.errorText}>

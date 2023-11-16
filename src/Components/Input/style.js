@@ -19,10 +19,22 @@ export const style = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colors.secondary,
   },
+  PasswordContainer: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderColor: colors.secondary,
+  },
 
   InputIcon: {
     height: 18,
     width: 18,
+    marginHorizontal: 10,
+  },
+  eyeIcon: {
+    height: 28,
+    width: 28,
     marginHorizontal: 10,
   },
   input: {
