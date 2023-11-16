@@ -21,8 +21,8 @@ import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import {SignInwithGoogle} from '../../../Config/Firebase/GoogleSignIn';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {decode} from 'base-64'
-global.atob = decode
+import {decode} from 'base-64';
+global.atob = decode;
 
 const Login = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
       const {user} = data;
       user.role = 'CUSTOMER';
       navigation.navigate('dashboardNavigations', user);
-      console.log(user, 'from login');
+      console.log(user, 'from google login');
     });
   };
 
@@ -65,17 +65,16 @@ const Login = ({navigation}) => {
       password: '',
     },
     onSubmit: async values => {
-      console.log(values);
+      // console.log(values);
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
-        console.log(values);
+        // console.log(values);
         try {
           const {data} = await axios.post(
             'http://10.0.2.2:8081/api/user/login',
             values,
           );
 
-          // console.log(data);
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           let role = await getRoleofTheUser(accessToken);
