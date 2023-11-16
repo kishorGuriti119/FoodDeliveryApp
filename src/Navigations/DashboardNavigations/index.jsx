@@ -10,6 +10,7 @@ import Login from '../../Screens/Authenticate/Login';
 import {useRoute} from '@react-navigation/native';
 import {View, ActivityIndicator} from 'react-native';
 import Loading from '../../Screens/Loading';
+import RestaurantLandingPage from '../../Screens/Interface/Restaurant/RestaurantLandingPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,13 @@ const DashboardNavigations = () => {
         <Stack.Screen
           name="customerlandingPage"
           component={CustomerLandingPage}
+          options={{headerShown: false}}
+        />
+      )}
+      {UserRole === 'RESTAURANT_OWNER' && (
+        <Stack.Screen
+          name="restaurantOwnerLandingPage"
+          component={RestaurantLandingPage}
           options={{headerShown: false}}
         />
       )}

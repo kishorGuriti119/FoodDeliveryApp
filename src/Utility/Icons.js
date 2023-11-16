@@ -16,6 +16,7 @@ export const Icons = {
   email_outline: require('../assets/email_outline.png'),
   gmail_fill: require('../assets/gmail_fill.png'),
   gmail_white: require('../assets/gmail_white.png'),
+  email_focused: require('../assets/email_focused.png'),
 
   country: require('../assets/country.png'),
   mobile: require('../assets/mobile.png'),
