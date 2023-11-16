@@ -107,7 +107,7 @@ const SignUp = ({navigation}) => {
               isPassword
               placeholder="set password"
               onChangeText={formik.handleChange('password')}
-              icon={' '}
+              icon={Icons.eye}
             />
             {formik.touched.password && formik.errors.password ? (
               <Text style={globelstyle.errorText}>

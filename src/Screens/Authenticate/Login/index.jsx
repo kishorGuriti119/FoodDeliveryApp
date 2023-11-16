@@ -132,7 +132,7 @@ const Login = ({navigation}) => {
               placeholder="Enter Password"
               onChangeText={formik.handleChange('password')}
               value={formik.values.password}
-              icon={Icons.closed_eye}
+              icon={Icons.eye}
             />
             {formik.touched.password && formik.errors.password ? (
               <Text style={globelstyle.errorText}>
