@@ -68,7 +68,6 @@ const Login = ({navigation}) => {
     onSubmit: async values => {
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
-        console.log(values);
         try {
           const data = await Auth_service.userLogin(values);
           console.log(data);
@@ -78,7 +77,6 @@ const Login = ({navigation}) => {
           let userData = {token: accessToken, role: role};
           navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
-          console.log(error);
           if (error.code === 'ECONNABORTED') {
             ToastAndroid.show(
               'Request timed out Try Again',
@@ -90,7 +88,6 @@ const Login = ({navigation}) => {
           }
         }
       } else {
-        console.log(errors);
         formik.setErrors(errors);
       }
     },

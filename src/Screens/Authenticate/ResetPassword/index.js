@@ -30,8 +30,6 @@ const ResetPassword = ({navigation}) => {
       newPassword: '',
     },
     onSubmit: async values => {
-      console.log(values);
-
       const {isValid, errors} = await Validate_Reset_Password(values);
 
       if (isValid) {
