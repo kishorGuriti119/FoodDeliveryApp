@@ -3,7 +3,7 @@ import {API} from './api';
 
 const Api_Methods = {
   get: async (url, params) => {},
-  post: async (url, data, token) => {
+  post: async (url, data = {}, params = {}, token) => {
     let headers = token
       ? {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}
       : {};

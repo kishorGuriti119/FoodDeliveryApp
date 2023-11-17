@@ -25,4 +25,28 @@ export default Auth_Api_service = {
       throw error.response;
     }
   },
+
+  forgetPassword: async email => {
+    try {
+      let response = await Api_Methods.post(
+        `${API.FDA_User_Auth_ForgetPassword_url}?loginId=${email}`,
+      );
+      return response;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+
+  Reset_Password: async resetPasswordDetails => {
+    try {
+      let reset_password_response = await Api_Methods.post(
+        API.FDA_User_Auth_ResetPassword_url,
+        resetPasswordDetails,
+      );
+      console.log(reset_password_response, 'resetpassword response');
+    } catch (error) {
+      console.log(error, 'reset password error');
+      throw error;
+    }
+  },
 };
