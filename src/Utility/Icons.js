@@ -40,4 +40,5 @@ export const Icons = {
   open_book:require('../assets/open_book.png'),
   shopping_basket:require('../assets/shopping_basket.png'),
   star: require('../assets/star.png'),
+  user_circle:require('../assets/user_circle.png')
 };

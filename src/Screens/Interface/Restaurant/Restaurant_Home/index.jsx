@@ -7,7 +7,7 @@ import axios from 'axios'
 import { Icons } from '../../../../Utility/Icons';
 import { style } from '../../../../Components/InterfaceHeader/style';
 import { colors } from '../../../../Utility/Colors';
-
+import { Badge } from 'react-native-paper';
 const Restaurant_Home = () => {
   const [restaurantAddress, setRestaurantAddress] = useState('')
   const [restuarantName, setRestaurantName] = useState('')
@@ -41,7 +41,7 @@ const Restaurant_Home = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.interfaceContainer }>
+      <View style={styles.interfaceContainer}>
         <Pressable>
           <Image source={Icons.dashboard_Icon} style={style.headerIcon} />
         </Pressable>
@@ -52,7 +52,7 @@ const Restaurant_Home = () => {
         <Image source={Icons.email_outline} style={style.headerIcon} />
       </View>
       <Text style={styles.welcomeText}>Welcome, {restuarantName}</Text>
-      <View style={styles.overviewCOntainer}>
+      <View style={styles.overviewContainer}>
         <View style={styles.card}>
           <View style={styles.viewOrdersContainer}>
             <Text style={styles.plainTextWhite}>
@@ -80,8 +80,37 @@ const Restaurant_Home = () => {
           </View>
         </View>
       </View>
+      <View style={styles.easyNavigationContaier}>
+        <View style={styles.lightCard}>
+          <View style={[styles.viewBookContainer, styles.customizedShoppingIcon]}>
+            <Image source={Icons.shopping_basket} style={styles.viewBookIcon} />
+            <Badge size={16} style={styles.badge}>3</Badge>
+          </View>
+          <Pressable>
+            <Text style={[styles.easyNavigationText, { color: "#32D583" }]}>View Orders</Text>
+          </Pressable>
+        </View>
+        <View style={styles.lightCard}>
+          <View style={[styles.viewBookContainer, styles.customizedMailIcon]}>
+            <Badge size={16} style={styles.badge}>5</Badge>
+            <Image source={Icons.email_outline} style={styles.viewBookIcon} />
+          </View>
+          <Pressable>
+            <Text style={[styles.easyNavigationText, { color: "#FFB547" }]}>Messages</Text>
+          </Pressable>
+        </View>
+        <View style={styles.lightCard}>
+          <View style={[styles.viewBookContainer, styles.customizedUSerIcon]}>
+            <Image source={Icons.user_circle} style={styles.viewBookIcon} />
+          </View>
+          <Pressable>
+            <Text style={[styles.easyNavigationText, { color: colors.primary }]}>Profile</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
 
 export default Restaurant_Home;
+

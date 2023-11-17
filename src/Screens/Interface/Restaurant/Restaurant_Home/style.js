@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700'
     },
-    overviewCOntainer: {
+    overviewContainer: {
         paddingTop: 40,
         flexDirection: "row",
         justifyContent: "center",
@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5, 
         justifyContent: "center", 
         alignItems: "center" 
+    
     },
     plainTextWhite:{
         color: "white"
@@ -56,6 +57,51 @@ export const styles = StyleSheet.create({
     viewBookIcon:{
         width: 28, 
         height: 26,
+    },
+    lightCard:{
+        borderStyle:'solid',
+        borderWidth:1,
+        borderRadius:3,
+        width:110,
+        height:130,
+        borderColor:"#EAECF0",
+        alignItems:"center",
+        justifyContent:"space-around"
+    },
+    easyNavigationContaier:{
+        paddingVertical:40,
+        justifyContent:"center",
+        flexDirection:"row",
+        gap:10
+    },
+    customizedShoppingIcon:{
+        backgroundColor:"#D6F7E6",
+        width:50,
+        height:50,
+    },
+    customizedMailIcon:{
+        backgroundColor :"#FFF0DA",
+        width:50,
+        height:50,
+    },
+    customizedUSerIcon:{
+        backgroundColor:"#FBDADB",
+        width:50,
+        height:50,
+    },
+    easyNavigationText:{
+        fontSize:14,
+        fontWeight:'700',
+        fontFamily:"Plus Jakarta Sans"
+    },
+    badge:{
+        backgroundColor:colors.primary,
+        position:'absolute',
+        top:-5,
+        right:-5,
+        fontWeight:"bold",
+        fontSize:10
     }
+    
 
 })
