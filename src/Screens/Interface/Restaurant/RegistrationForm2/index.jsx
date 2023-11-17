@@ -60,17 +60,6 @@ const RestaurantForm2 = ({navigation}) => {
       if (isValid) {
         console.log(values);
         try {
-          // const {data} = await axios.post(
-          //   'http://10.0.2.2:8082/api/restaurant/restaurant',
-          //   values,
-
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${token}`,
-          //       'Content-Type': 'application/json',
-          //     },
-          //   },
-          // );
           let data = await restaurant_service.RegisterRestaurant(values, token);
           if (data.status === 201 || 200) {
             ToastAndroid.show('Restaurant Added', ToastAndroid.SHORT);
