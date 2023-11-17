@@ -68,8 +68,10 @@ const Login = ({navigation}) => {
     onSubmit: async values => {
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
+        console.log(values);
         try {
           const data = await Auth_service.userLogin(values);
+          console.log(data);
           const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           let role = await getRoleofTheUser(accessToken);

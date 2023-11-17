@@ -17,7 +17,6 @@ import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
 import {useFormik} from 'formik';
 import {ValidateSignUp} from '../../../Validations/InputValidation';
-import axios from 'axios';
 import Auth_service from '../../../Services/Auth_service';
 
 const SignUp = ({navigation}) => {
@@ -49,8 +48,6 @@ const SignUp = ({navigation}) => {
           ToastAndroid.show('user created', ToastAndroid.SHORT);
           navigation.navigate('login');
         } catch (error) {
-          console.log(error, 'ddd');
-
           if (error.code === 'ECONNABORTED') {
             ToastAndroid.show(
               'Request timed out Try Again',
