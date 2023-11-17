@@ -75,8 +75,10 @@ const Login = ({navigation}) => {
             values,
           );
 
-          const {accessToken, email, refreshToken} = data;
+          const {accessToken, email, refreshToken,id} = data;
+          console.log(data)
           const token = await AsyncStorage.setItem('token', accessToken);
+          const userId = await AsyncStorage.setItem('userid', id);
           let role = await getRoleofTheUser(accessToken);
 
           let userData = {token: accessToken, role: role};

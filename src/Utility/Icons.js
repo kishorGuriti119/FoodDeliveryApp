@@ -37,6 +37,7 @@ export const Icons = {
   Favorites_white: require('../assets/favorite_white.png'),
   settings: require('../assets/settings.png'),
   settings_focused: require('../assets/settings_focused.png'),
-
+  open_book:require('../assets/open_book.png'),
+  shopping_basket:require('../assets/shopping_basket.png'),
   star: require('../assets/star.png'),
 };
