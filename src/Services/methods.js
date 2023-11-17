@@ -3,8 +3,12 @@ import {API} from './api';
 
 const Api_Methods = {
   get: async (url, params) => {},
-  post: async (url, data) => {
-    let response = await axios.post(`${url}`, data);
+  post: async (url, data, token) => {
+    let headers = token
+      ? {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}
+      : {};
+
+    let response = await axios.post(`${url}`, data, {headers});
     return response;
   },
 };
