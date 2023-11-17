@@ -5,6 +5,8 @@ export const API = {
 
   FDA_User_Auth_Login_Url: `${FDA_Base_Url}8081/api/user/login`,
   FDA_User_Auth_Signup_Url: `${FDA_Base_Url}8081/api/user/register`,
+  FDA_User_Auth_ForgetPassword_url: `${FDA_Base_Url}8081/api/user/forgotpassword`,
+  FDA_User_Auth_ResetPassword_url: `${FDA_Base_Url}8081/api/user/resetpassword`,
 
   //Admin
 

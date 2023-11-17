@@ -18,6 +18,7 @@ import Button from '../../../Components/Button';
 import {useState} from 'react';
 import axios from 'axios';
 import {ValidateForgotPassword} from '../../../Validations/InputValidation';
+import Auth_service from '../../../Services/Auth_service';
 axios.defaults.timeout = 5000;
 
 const ForgotPassword = ({navigation}) => {
@@ -32,37 +33,25 @@ const ForgotPassword = ({navigation}) => {
       if (isValid) {
         try {
           setIsLoading(true);
-          await axios
-            .post(
-              `http://10.0.2.2:8081/api/user/forgotpassword?loginId=${values.emailAddress}`,
-            )
-            .then(res => {
-              if (res.status === 200) {
-                setIsLoading(false);
-                ToastAndroid.show(
-                  `Code Sent to ${formik.values.emailAddress} `,
-                  ToastAndroid.SHORT,
-                );
-                setTimeout(() => {
-                  navigation.navigate('resetpassword');
-                }, 1000);
-              } else {
-                ToastAndroid.show('Error', ToastAndroid.SHORT);
-              }
-            })
-            .catch(err => {
-              setIsLoading(false);
-              if (err.code === 'ECONNABORTED') {
-                ToastAndroid.show(
-                  'Request timed out Try Again',
-                  ToastAndroid.SHORT,
-                );
-              } else {
-                ToastAndroid.show('Check Email', ToastAndroid.SHORT);
-              }
-            });
+          let ForgetPassword_response = await Auth_service.forgetPassword(
+            values.emailAddress,
+          );
+
+          setIsLoading(false);
+
+          ToastAndroid.show(
+            `Check Email ${formik.values.emailAddress} `,
+            ToastAndroid.SHORT,
+          );
+          setTimeout(() => {
+            navigation.navigate('resetpassword');
+          }, 1500);
         } catch (error) {
-          ToastAndroid.show('Network Error', ToastAndroid.SHORT);
+          if (error.statusCode === '500') {
+            alert('Email not exist');
+          } else {
+            ToastAndroid.show('Network Error', ToastAndroid.SHORT);
+          }
         }
       } else {
         formik.setErrors(errors);

@@ -18,6 +18,7 @@ import {style} from '../Login/style';
 import {styles} from './style';
 import axios from 'axios';
 import {Validate_Reset_Password} from '../../../Validations/InputValidation';
+import Auth_service from '../../../Services/Auth_service';
 axios.defaults.timeout = 5000;
 
 const ResetPassword = ({navigation}) => {
@@ -36,22 +37,21 @@ const ResetPassword = ({navigation}) => {
       if (isValid) {
         try {
           setIsLoading(true);
-          const {data} = await axios.post(
-            `http://10.0.2.2:8081/api/user/resetpassword`,
+          let reset_password_response = await Auth_service.Reset_Password(
             values,
           );
-          console.log(data);
-          if (data) {
-            setIsLoading(false);
-          }
+          setIsLoading(false);
           ToastAndroid.show(
-            'Resettin Password Succussfull',
+            'Resetting Password Succussfull',
             ToastAndroid.SHORT,
           );
-        } catch (error) {
-          console.log(error);
 
-          if (err.code === 'ECONNABORTED') {
+          setTimeout(() => {
+            navigation.navigate('login');
+          });
+        } catch (error) {
+          setIsLoading(false);
+          if (error.code === 'ECONNABORTED') {
             ToastAndroid.show(
               'Request timed out Try Again',
               ToastAndroid.SHORT,
@@ -60,7 +60,6 @@ const ResetPassword = ({navigation}) => {
         }
       } else {
         formik.setErrors(errors);
-        console.log('Error');
       }
     },
   });
