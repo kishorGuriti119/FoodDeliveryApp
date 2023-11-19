@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Button from '../../../../Components/Button';
-import {ScrollView, Text, View, Image, Pressable} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  Pressable,
+  ToastAndroid,
+} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {style} from './style';
 import ProfileInput from '../../../../Components/ProfileInput';
@@ -12,6 +19,8 @@ import {Validate_restaurant_Registration} from '../../../../Validations/InputVal
 import {globelstyle} from '../../../../Utility/GlobelStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import restaurant_service from '../../../../Services/restaurant_service';
+import {API} from '../../../../Services/api';
 
 const RestaurantForm2 = ({navigation}) => {
   const route = useRoute();
@@ -22,10 +31,8 @@ const RestaurantForm2 = ({navigation}) => {
   useEffect(() => {
     const getToken = async () => {
       let Storedtoken = await AsyncStorage.getItem('token');
-      console.log(Storedtoken);
       if (Storedtoken !== null) {
         setToken(Storedtoken);
-        console.log(token);
       }
     };
     getToken();
@@ -53,19 +60,11 @@ const RestaurantForm2 = ({navigation}) => {
       if (isValid) {
         console.log(values);
         try {
-          const {data} = await axios.post(
-            'http://10.0.2.2:8082/api/restaurant/restaurant',
-            values,
-
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          );
-
-          console.log(data, 'restaurant added');
+          let data = await restaurant_service.RegisterRestaurant(values, token);
+          if (data.status === 201 || 200) {
+            ToastAndroid.show('Restaurant Added', ToastAndroid.SHORT);
+            navigation.navigate('Home');
+          }
         } catch (error) {
           console.log(error.message);
         }

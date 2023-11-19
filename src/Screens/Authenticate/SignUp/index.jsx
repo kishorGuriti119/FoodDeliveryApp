@@ -17,7 +17,7 @@ import CheckBox from '../../../Components/CheckBox';
 import Button from '../../../Components/Button';
 import {useFormik} from 'formik';
 import {ValidateSignUp} from '../../../Validations/InputValidation';
-import axios from 'axios';
+import Auth_service from '../../../Services/Auth_service';
 
 const SignUp = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -44,15 +44,26 @@ const SignUp = ({navigation}) => {
       }
       if (isValid & isChecked) {
         try {
-          let {data} = await axios.post(
-            `http://10.0.2.2:8081/api/user/register`,
-            values,
-          );
-
+          let data = await Auth_service.userSignUp(values);
           ToastAndroid.show('user created', ToastAndroid.SHORT);
           navigation.navigate('login');
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+          if (error.code === 'ECONNABORTED') {
+            ToastAndroid.show(
+              'Request timed out Try Again',
+              ToastAndroid.SHORT,
+            );
+          } else if (error.status === 409) {
+            ToastAndroid.show(
+              'User with Email Already Exist',
+              ToastAndroid.SHORT,
+            );
+          } else {
+            ToastAndroid.show(
+              'something went wrong , Try Again',
+              ToastAndroid.SHORT,
+            );
+          }
         }
       } else {
         formik.setErrors(errors);

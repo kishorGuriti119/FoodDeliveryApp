@@ -24,6 +24,7 @@ const DashboardNavigations = () => {
   useEffect(() => {
     const getRole = async Storedtoken => {
       let decoded = jwtDecode(Storedtoken);
+      console.log(decoded, 'decoded ');
       const roles = decoded.roles;
       console.log('roles', roles);
       return roles[0];

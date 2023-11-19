@@ -22,6 +22,7 @@ import {jwtDecode} from 'jwt-decode';
 import {SignInwithGoogle} from '../../../Config/Firebase/GoogleSignIn';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {decode} from 'base-64';
+import Auth_service from '../../../Services/Auth_service';
 global.atob = decode;
 
 const Login = ({navigation}) => {
@@ -65,36 +66,29 @@ const Login = ({navigation}) => {
       password: '',
     },
     onSubmit: async values => {
-      // console.log(values);
       const {isValid, errors} = await ValidateLogin(values);
       if (isValid) {
-        // console.log(values);
         try {
-          const {data} = await axios.post(
-            'http://10.0.2.2:8081/api/user/login',
-            values,
-          );
-
-          const {accessToken, email, refreshToken,id} = data;
-          console.log(data)
+          const data = await Auth_service.userLogin(values);
+          console.log(data);
+          const {accessToken, email, refreshToken} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           const userId = await AsyncStorage.setItem('userid', id);
           let role = await getRoleofTheUser(accessToken);
-
           let userData = {token: accessToken, role: role};
-
           navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
-          console.log(error);
           if (error.code === 'ECONNABORTED') {
             ToastAndroid.show(
               'Request timed out Try Again',
               ToastAndroid.SHORT,
             );
           }
+          if (error) {
+            ToastAndroid.show('Invalid Credentials', ToastAndroid.SHORT);
+          }
         }
       } else {
-        console.log(errors);
         formik.setErrors(errors);
       }
     },
