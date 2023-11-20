@@ -71,7 +71,7 @@ const Login = ({navigation}) => {
         try {
           const data = await Auth_service.userLogin(values);
           console.log(data);
-          const {accessToken, email, refreshToken} = data;
+          const {accessToken, email, refreshToken,id} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           const userId = await AsyncStorage.setItem('userid', id);
           let role = await getRoleofTheUser(accessToken);
