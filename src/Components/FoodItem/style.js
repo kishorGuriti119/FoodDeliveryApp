@@ -5,6 +5,7 @@ export const style = StyleSheet.create({
   Item: {
     marginHorizontal: 5,
     maxHeight: 225,
+    position: 'relative',
   },
   cardImage: {
     height: 150,
@@ -31,5 +32,13 @@ export const style = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     lineHeight: 20,
+  },
+
+  wishList: {
+    height: 23,
+    width: 26,
+    position: 'absolute',
+    right: 10,
+    top: 5,
   },
 });

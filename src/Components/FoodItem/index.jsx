@@ -12,6 +12,7 @@ const FoodItem = ({itemImage, title, deliveryTime, price}) => {
         <Text style={style.Price}>{price}</Text>
         <Text style={style.delivery}>deliveryTime | {deliveryTime} mins</Text>
       </View>
+      <Image source={Icons.Favorites_white} style={style.wishList} />
     </Pressable>
   );
 };
