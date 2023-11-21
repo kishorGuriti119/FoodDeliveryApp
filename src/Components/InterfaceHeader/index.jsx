@@ -18,7 +18,7 @@ const InterfaceHeader = ({
   return (
     <View style={style.headerContainer}>
       {dashboardIcon ? (
-        <Pressable>
+        <Pressable onPress={onPress} hitSlop={20}>
           <Image source={Icons.dashboard_Icon} style={style.headerIcon} />
         </Pressable>
       ) : PreviousPage ? (
