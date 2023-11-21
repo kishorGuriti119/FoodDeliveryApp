@@ -8,9 +8,12 @@ import { Icons } from '../../../../Utility/Icons';
 import { style } from '../../../../Components/InterfaceHeader/style';
 import { colors } from '../../../../Utility/Colors';
 import { Badge } from 'react-native-paper';
-const Restaurant_Home = () => {
+import { Drawer } from 'react-native-drawer-layout';
+
+const Restaurant_Home = ({ navigation}) => {
   const [restaurantAddress, setRestaurantAddress] = useState('')
   const [restuarantName, setRestaurantName] = useState('')
+  const [isProfile, setIsProfile] = useState(false)
 
   useEffect(() => {
     restaurantDetails()
@@ -42,7 +45,7 @@ const Restaurant_Home = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.interfaceContainer}>
-        <Pressable>
+        <Pressable >
           <Image source={Icons.dashboard_Icon} style={style.headerIcon} />
         </Pressable>
         <View style={{ flexDirection: 'row' }}>
