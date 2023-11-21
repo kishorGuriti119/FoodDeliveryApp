@@ -1,6 +1,7 @@
 import React from 'react';
 import {Pressable, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {colors} from '../../Utility/Colors';
 import {style} from './style';
 
 const Button = ({title, onPress, accessibilityLabel = ''}) => {

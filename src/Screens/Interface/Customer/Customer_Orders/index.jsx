@@ -3,31 +3,21 @@ import {ImageBackground, Text, View, Image} from 'react-native';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import {style} from './style';
 import {Icons} from '../../../../Utility/Icons';
-const Customer_Orders = () => {
+import {Order_status} from '../../../../Utility/Flatlist_data';
+import ShowFlatList from '../../../../Components/ShowFlatList';
+
+const Customer_Orders = ({navigation}) => {
   return (
     <View style={style.container}>
-      <ImageBackground
-        source={Icons.oreder_preview}
-        style={style.backgroundImg}
+      <InterfaceHeader
+        PreviousPage
+        notifications
+        onPress={() => navigation.goBack()}
       />
-      <View style={style.headerPosition}>
-        <InterfaceHeader
-          orderpreview
-          title="palasa"
-          location
-          notifications
-          PreviousPage
-          myStyle={style.customBack}
-          locationCustomstyle={style.locationStyle}
-        />
+      <View style={style.title}>
+        <Text style={style.titleText}>Your Orders</Text>
       </View>
-      <View style={style.orderPreview_fav_rating_container}>
-        <Image source={Icons.Favorites_white} style={style.FavouritesIcon} />
-        <View style={style.ratingContainer}>
-          <Image source={Icons.star} style={style.starIcon} />
-          <Text style={style.ratingText}>4.9k Ratings</Text>
-        </View>
-      </View>
+      <ShowFlatList data={Order_status} defaultSelected="Pending" />
     </View>
   );
 };

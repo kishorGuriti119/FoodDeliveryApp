@@ -9,8 +9,8 @@ export const style = StyleSheet.create({
     alignItems: 'center',
   },
   headerIcon: {
-    height: 18,
-    width: 18,
+    height: 20,
+    width: 20,
   },
 
   location: {
