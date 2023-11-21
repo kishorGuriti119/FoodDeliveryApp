@@ -13,6 +13,7 @@ const InterfaceHeader = ({
   PreviousPage,
   myStyle,
   locationCustomstyle,
+  onPress,
 }) => {
   return (
     <View style={style.headerContainer}>
@@ -21,7 +22,10 @@ const InterfaceHeader = ({
           <Image source={Icons.dashboard_Icon} style={style.headerIcon} />
         </Pressable>
       ) : PreviousPage ? (
-        <Pressable hitSlop={20} style={[style.backArrowContainer, myStyle]}>
+        <Pressable
+          hitSlop={20}
+          style={[style.backArrowContainer, myStyle]}
+          onPress={onPress}>
           <Image
             source={
               orderpreview ? Icons.direction_left_black : Icons.direction_left

@@ -6,7 +6,6 @@ export const style = StyleSheet.create({
     padding: 16,
     borderRadius: 34,
     marginVertical: 4,
-    // marginHorizontal: -3,
   },
   title: {
     color: colors.whiteText,

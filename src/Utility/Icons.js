@@ -25,6 +25,7 @@ export const Icons = {
 
   user: require('../assets/user.png'),
   user_shade: require('../assets/user_dark.png'),
+  user_circle: require('../assets/user_circle.png'),
   profile: require('../assets/user.png'),
   profile_focused: require('../assets/profile_focused.png'),
 
@@ -32,13 +33,21 @@ export const Icons = {
   orders_focused: require('../assets/orders_focused.png'),
   orders_animated: require('../assets/orders_animated.gif'),
   oreder_preview: require('../assets/order_preview.png'),
+
   Favourites: require('../assets/Favouriti.png'),
   Favorites_Focused: require('../assets/Favority_Focoused.png'),
   Favorites_white: require('../assets/favorite_white.png'),
+
   settings: require('../assets/settings.png'),
   settings_focused: require('../assets/settings_focused.png'),
-  open_book:require('../assets/open_book.png'),
-  shopping_basket:require('../assets/shopping_basket.png'),
+  search: require('../assets/search.png'),
+
+  open_book: require('../assets/open_book.png'),
+  shopping_basket: require('../assets/shopping_basket.png'),
   star: require('../assets/star.png'),
-  user_circle:require('../assets/user_circle.png')
+
+  fire: require('../assets/fire.png'),
+
+  customer_Home_Special_Card: require('../assets/customer_home_Specials_card.png'),
+  special_card_image: require('../assets/special_card_image.png'),
 };
