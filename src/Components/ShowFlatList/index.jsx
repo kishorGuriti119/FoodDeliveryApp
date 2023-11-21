@@ -6,7 +6,7 @@ import {Text, View, FlatList, Image, Pressable, ScrollView} from 'react-native';
 const ShowFlatList = ({data, defaultSelected}) => {
   const [selected, setSelected] = useState(defaultSelected);
 
-  const renderOrderCategory = ({item}) => {
+  const renderList = ({item}) => {
     return (
       <FlatList_box
         title={item.title}
@@ -19,14 +19,14 @@ const ShowFlatList = ({data, defaultSelected}) => {
 
   return (
     <View>
-    <FlatList
-      showsHorizontalScrollIndicator={false}
-      data={data}
-      style={{marginVertical: 24}}
-      horizontal
-      renderItem={renderOrderCategory}
-      keyExtractor={(item, index) => index}
-    />
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        data={data}
+        style={{marginVertical: 24}}
+        horizontal
+        renderItem={renderList}
+        keyExtractor={(item, index) => index}
+      />
     </View>
   );
 };

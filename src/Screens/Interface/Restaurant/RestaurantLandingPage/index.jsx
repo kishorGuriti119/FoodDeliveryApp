@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import Restaurant_Home from '../Restaurant_Home';
 import Restaurant_Orders from '../Restaurant_Orders';
 import Restaurant_Messages from '../Restaurant_Messages';
 import Restaurant_Profile from '../Restaurant_Profile';
-import { Icons } from '../../../../Utility/Icons';
-import { colors } from '../../../../Utility/Colors';
-import { Image ,Text} from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Icons} from '../../../../Utility/Icons';
+import {colors} from '../../../../Utility/Colors';
+import {Image, Text} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SideBarContent from '../../../../Components/SideBar/SideBarLayout';
-import { Drawer } from 'react-native-drawer-layout';
+import {Drawer} from 'react-native-drawer-layout';
 const Tab = createBottomTabNavigator();
 
 const RestaurantLandingPage = () => {
@@ -21,12 +21,11 @@ const RestaurantLandingPage = () => {
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
       renderDrawerContent={() => {
-        return <SideBarContent/>;
-      }}
-    >
+        return <SideBarContent />;
+      }}>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused }) => {
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused}) => {
             let icon;
             if (route.name === 'Home') {
               icon = focused ? Icons.Home_Focused : Icons.Home;
@@ -38,7 +37,7 @@ const RestaurantLandingPage = () => {
               icon = focused ? Icons.orders_focused : Icons.orders;
             }
 
-            return <Image source={icon} style={{ height: 24, width: 24 }} />;
+            return <Image source={icon} style={{height: 24, width: 24}} />;
           },
           headerShown: false,
           tabBarShowLabel: true,
@@ -52,16 +51,16 @@ const RestaurantLandingPage = () => {
             color: 'gray',
           },
         })}>
-        <Tab.Screen name="Home" component={Restaurant_Home}/>
+        <Tab.Screen
+          name="Home"
+          children={() => <Restaurant_Home open={open} setOpen={setOpen} />}
+        />
         <Tab.Screen name="Orders" component={Restaurant_Orders} />
         <Tab.Screen name="Messages" component={Restaurant_Messages} />
         <Tab.Screen name="Profile" component={Restaurant_Profile} />
       </Tab.Navigator>
-    </Drawer >
+    </Drawer>
   );
 };
-
-
-
 
 export default RestaurantLandingPage;
