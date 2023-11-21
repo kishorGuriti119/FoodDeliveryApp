@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -17,8 +17,26 @@ import ShowFlatList from '../../../../Components/ShowFlatList';
 import {Icons} from '../../../../Utility/Icons';
 import {colors} from '../../../../Utility/Colors';
 import SearchInput from '../../../../Components/SearchInput';
+import {FoodItems} from '../../../../Utility/Flatlist_data';
+import NoData from '../../../../Components/NoData';
 
 const Customer_Home = () => {
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+  const [FoodItemsData, setFoodItemsData] = useState(FoodItems);
+
+  let filterdFoodItems = [];
+
+  useEffect(() => {
+    if (searchKeyWord) {
+      let filterdFoodItems = FoodItems.filter(each =>
+        each.title.toLowerCase().includes(searchKeyWord.toLocaleLowerCase()),
+      );
+      setFoodItemsData(filterdFoodItems);
+    } else {
+      setFoodItemsData(FoodItems);
+    }
+  }, [searchKeyWord]);
+
   return (
     <ScrollView>
       <View style={style.container}>
@@ -31,7 +49,11 @@ const Customer_Home = () => {
         <View style={style.title}>
           <Text style={style.titleText}>What are we ordering today?</Text>
         </View>
-        <ShowFlatList data={Order_category} defaultSelected="Popular" />
+        <ShowFlatList
+          data={Order_category}
+          defaultSelected="Popular"
+          categoryType
+        />
 
         <View style={style.special_card_container}>
           <ImageBackground
@@ -55,7 +77,10 @@ const Customer_Home = () => {
           </ImageBackground>
         </View>
         <View>
-          <SearchInput placeholder="hello" />
+          <SearchInput
+            placholder="Find your favourite delicacy"
+            onChangeText={v => setSearchKeyWord(v)}
+          />
         </View>
 
         <View style={style.popularPicContainer}>
@@ -64,6 +89,24 @@ const Customer_Home = () => {
             <Text style={style.seemoreText}>See more...</Text>
           </Pressable>
         </View>
+
+        {FoodItemsData.length === 0 ? (
+          <NoData />
+        ) : (
+          <ShowFlatList data={FoodItemsData} foodItemsType />
+        )}
+
+        <View style={style.popularPicContainer}>
+          <Text style={style.popularText}>Today’s favourites🍜</Text>
+          <Pressable style={style.seemore}>
+            <Text style={style.seemoreText}>See more...</Text>
+          </Pressable>
+        </View>
+        {FoodItemsData.length === 0 ? (
+          <NoData />
+        ) : (
+          <ShowFlatList data={FoodItemsData} foodItemsType />
+        )}
       </View>
     </ScrollView>
   );

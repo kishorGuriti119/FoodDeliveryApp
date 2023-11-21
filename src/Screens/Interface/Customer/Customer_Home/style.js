@@ -6,8 +6,8 @@ export const style = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
     paddingVertical: 36,
-    height: height,
     backgroundColor: colors.whiteText,
+    minHeight: height,
   },
 
   title: {
@@ -77,7 +77,6 @@ export const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 20,
   },
   popularText: {
     color: colors.primary,
