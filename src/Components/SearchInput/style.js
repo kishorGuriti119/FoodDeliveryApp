@@ -10,6 +10,7 @@ export const style = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 5,
+    marginBottom: 10,
   },
   searchInput: {
     flex: 1,
