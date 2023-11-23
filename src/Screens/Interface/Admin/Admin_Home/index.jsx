@@ -23,6 +23,9 @@ const Admin_Home = ({navigation}) => {
 
   return (
     <SafeAreaView>
+      <View>
+        <Button title="open drawer" onPress={() => navigation.openDrawer()} />
+      </View>
       <View style={style.container}>
         <View style={style.addRestaurantcard}>
           <ImageBackground

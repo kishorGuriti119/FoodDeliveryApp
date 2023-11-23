@@ -11,6 +11,8 @@ import {useRoute} from '@react-navigation/native';
 import {View, ActivityIndicator} from 'react-native';
 import Loading from '../../Screens/Loading';
 import RestaurantLandingPage from '../../Screens/Interface/Restaurant/RestaurantLandingPage';
+import Admin_Drawer from '../../Screens/Interface/Admin/Admin_Drawer';
+import Customer_Drawer from '../../Screens/Interface/Customer/Customer_Drawer';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,15 +46,15 @@ const DashboardNavigations = () => {
     <Stack.Navigator>
       {UserRole === 'ADMIN' && (
         <Stack.Screen
-          name="AdminlandingPage"
-          component={AdminLandingPage}
+          name="AdminDrawer"
+          component={Admin_Drawer}
           options={{headerShown: false}}
         />
       )}
       {UserRole === 'CUSTOMER' && (
         <Stack.Screen
-          name="customerlandingPage"
-          component={CustomerLandingPage}
+          name="customerDrawer"
+          component={Customer_Drawer}
           options={{headerShown: false}}
         />
       )}

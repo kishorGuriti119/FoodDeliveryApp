@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Customer_Profile = ({navigation}) => {
-  const onLogut = async () => {
+  const onLogout = async () => {
     let token = await AsyncStorage.getItem('token');
     if (token) {
       console.log('token from backend');
@@ -19,7 +19,7 @@ const Customer_Profile = ({navigation}) => {
     navigation.navigate('login');
   };
 
-  return <Button title="Logout" onPress={onLogut} />;
+  return <Button title="Logout" onPress={onLogout} />;
 };
 
 export default Customer_Profile;

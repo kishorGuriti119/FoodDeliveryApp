@@ -40,7 +40,7 @@ const CustomerLandingPage = () => {
         tabBarIcon: ({focused}) => {
           let icon;
 
-          if (route.name === 'Home') {
+          if (route.name === 'HomeScreen') {
             icon = focused ? Icons.Home_Focused : Icons.Home;
           } else if (route.name === 'Favorities') {
             icon = focused ? Icons.Favorites_Focused : Icons.Favourites;
@@ -64,7 +64,7 @@ const CustomerLandingPage = () => {
           color: 'gray',
         },
       })}>
-      <Tab.Screen name="Home" component={Customer_Home} />
+      <Tab.Screen name="HomeScreen" component={Customer_Home} />
       <Tab.Screen name="Orders" component={Customer_Orders} />
       <Tab.Screen name="Favorities" component={Customer_Favourites} />
       <Tab.Screen name="Profile" component={Customer_Profile} />
