@@ -20,11 +20,9 @@ import SearchInput from '../../../../Components/SearchInput';
 import {FoodItems} from '../../../../Utility/Flatlist_data';
 import NoData from '../../../../Components/NoData';
 
-const Customer_Home = () => {
+const Customer_Home = ({navigation}) => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [FoodItemsData, setFoodItemsData] = useState(FoodItems);
-
-  let filterdFoodItems = [];
 
   useEffect(() => {
     if (searchKeyWord) {
@@ -45,6 +43,7 @@ const Customer_Home = () => {
           location
           title="Area 7, Garki Abuja"
           notifications
+          HandleDashboard={() => navigation.toggleDrawer()}
         />
         <View style={style.title}>
           <Text style={style.titleText}>What are we ordering today?</Text>
