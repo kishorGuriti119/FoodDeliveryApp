@@ -13,7 +13,7 @@ import {Icons} from '../../../../Utility/Icons';
 import {colors} from '../../../../Utility/Colors';
 import Button from '../../../../Components/Button';
 const Order_Preview = ({route, navigation}) => {
-  const [itemQuantity, setItemQuantity] = useState(1);
+  const [itemQuantity, setItemQuantity] = useState(parseInt(1));
   const {item} = route?.params;
   return (
     <ScrollView style={style.container}>
@@ -46,15 +46,19 @@ const Order_Preview = ({route, navigation}) => {
             <View style={style.quantity_Container}>
               <Pressable
                 hitslop={20}
-                disabled={itemQuantity <= 1}
+                disabled={itemQuantity <= parseInt(1)}
                 style={style.quantityAction}
-                onPress={() => setItemQuantity(itemQuantity - 1)}>
+                onPress={() =>
+                  setItemQuantity(itemQuantity => parseInt(itemQuantity - 1))
+                }>
                 <Text style={style.quantityIndex}>-</Text>
               </Pressable>
               <Text style={style.quantity}>{`X${itemQuantity}`}</Text>
               <Pressable
                 style={style.quantityAction}
-                onPress={() => setItemQuantity(itemQuantity + 1)}>
+                onPress={() =>
+                  setItemQuantity(itemQuantity => parseInt(itemQuantity + 1))
+                }>
                 <Text style={style.quantityIndex}>+</Text>
               </Pressable>
             </View>
