@@ -13,6 +13,7 @@ const Customer_Orders = ({navigation}) => {
         PreviousPage
         notifications
         onPress={() => navigation.goBack()}
+        onNotification={() => navigation.navigate('Messages')}
       />
       <View style={style.title}>
         <Text style={style.titleText}>Your Orders</Text>

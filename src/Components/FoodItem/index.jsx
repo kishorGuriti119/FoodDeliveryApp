@@ -3,9 +3,9 @@ import {Image, View, Text, Pressable} from 'react-native';
 import {style} from './style';
 import {Icons} from '../../Utility/Icons';
 
-const FoodItem = ({itemImage, title, deliveryTime, price}) => {
+const FoodItem = ({itemImage, title, deliveryTime, price, onPress}) => {
   return (
-    <Pressable style={style.Item}>
+    <Pressable style={style.Item} onPress={onPress}>
       <Image source={itemImage} style={style.cardImage} />
       <View style={style.FoodItemDescriptionContainer}>
         <Text style={style.title}>{title}</Text>

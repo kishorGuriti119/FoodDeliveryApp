@@ -28,9 +28,11 @@ import Customer_Profile from '../Customer_Profile';
 import {Icons} from '../../../../Utility/Icons';
 import {colors} from '../../../../Utility/Colors';
 import {Image} from 'react-native';
+import Order_Preview from '../OrderPreview';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Customer_Home_Stack from '../Customer_Home_Stack';
 const Tab = createBottomTabNavigator();
 
 const CustomerLandingPage = () => {
@@ -64,10 +66,11 @@ const CustomerLandingPage = () => {
           color: 'gray',
         },
       })}>
-      <Tab.Screen name="HomeScreen" component={Customer_Home} />
+      <Tab.Screen name="HomeScreen" component={Customer_Home_Stack} />
       <Tab.Screen name="Orders" component={Customer_Orders} />
       <Tab.Screen name="Favorities" component={Customer_Favourites} />
       <Tab.Screen name="Profile" component={Customer_Profile} />
+      {/* <Tab.Screen name="orderPreview" component={Order_Preview} /> */}
     </Tab.Navigator>
   );
 };

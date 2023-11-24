@@ -35,6 +35,10 @@ const Customer_Home = ({navigation}) => {
     }
   }, [searchKeyWord]);
 
+  const onFoodItemClick = item => {
+    navigation.navigate('orderPreview', {item});
+  };
+
   return (
     <ScrollView>
       <View style={style.container}>
@@ -44,6 +48,7 @@ const Customer_Home = ({navigation}) => {
           title="Area 7, Garki Abuja"
           notifications
           HandleDashboard={() => navigation.toggleDrawer()}
+          onNotification={() => navigation.navigate('Messages')}
         />
         <View style={style.title}>
           <Text style={style.titleText}>What are we ordering today?</Text>
@@ -92,7 +97,11 @@ const Customer_Home = ({navigation}) => {
         {FoodItemsData.length === 0 ? (
           <NoData />
         ) : (
-          <ShowFlatList data={FoodItemsData} foodItemsType />
+          <ShowFlatList
+            data={FoodItemsData}
+            foodItemsType
+            onFoodItemClick={onFoodItemClick}
+          />
         )}
 
         <View style={style.popularPicContainer}>
@@ -104,7 +113,11 @@ const Customer_Home = ({navigation}) => {
         {FoodItemsData.length === 0 ? (
           <NoData />
         ) : (
-          <ShowFlatList data={FoodItemsData} foodItemsType />
+          <ShowFlatList
+            data={FoodItemsData}
+            foodItemsType
+            onFoodItemClick={item => onFoodItemClick(item)}
+          />
         )}
       </View>
     </ScrollView>

@@ -15,6 +15,8 @@ const InterfaceHeader = ({
   locationCustomstyle,
   onPress,
   HandleDashboard,
+  onNotification,
+  onBackPress,
 }) => {
   return (
     <View style={style.headerContainer}>
@@ -26,7 +28,7 @@ const InterfaceHeader = ({
         <Pressable
           hitSlop={20}
           style={[style.backArrowContainer, myStyle]}
-          onPress={onPress}>
+          onPress={onBackPress}>
           <Image
             source={
               orderpreview ? Icons.direction_left_black : Icons.direction_left
@@ -54,7 +56,7 @@ const InterfaceHeader = ({
       )}
 
       {notifications ? (
-        <Pressable onPress={onPress}>
+        <Pressable onPress={onNotification}>
           <Image
             source={orderpreview ? Icons.gmail_white : Icons.email_outline}
             style={style.headerIcon}

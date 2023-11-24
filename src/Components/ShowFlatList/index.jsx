@@ -11,6 +11,7 @@ const ShowFlatList = ({
   notificationsType,
   foodItemsType,
   ordersType,
+  onFoodItemClick,
 }) => {
   const [selected, setSelected] = useState(defaultSelected);
 
@@ -33,6 +34,7 @@ const ShowFlatList = ({
           title={item.title}
           deliveryTime={item.deliveryTime}
           price={item.price}
+          onPress={() => onFoodItemClick(item)}
         />
       );
     }
