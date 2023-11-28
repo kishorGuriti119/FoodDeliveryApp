@@ -13,6 +13,7 @@ import Loading from '../../Screens/Loading';
 import RestaurantLandingPage from '../../Screens/Interface/Restaurant/RestaurantLandingPage';
 import Admin_Drawer from '../../Screens/Interface/Admin/Admin_Drawer';
 import Customer_Drawer from '../../Screens/Interface/Customer/Customer_Drawer';
+import Restaurant_Drawer from '../../Screens/Interface/Restaurant/Restaurant_Drawer';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,8 +61,8 @@ const DashboardNavigations = () => {
       )}
       {UserRole === 'RESTAURANT_OWNER' && (
         <Stack.Screen
-          name="restaurantOwnerLandingPage"
-          component={RestaurantLandingPage}
+          name="RestaurantDrawer"
+          component={Restaurant_Drawer}
           options={{headerShown: false}}
         />
       )}

@@ -5,10 +5,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 import {Icons} from '../../../../Utility/Icons';
-import {style} from '../../../../Components/InterfaceHeader/style';
 import {colors} from '../../../../Utility/Colors';
 import {Badge} from 'react-native-paper';
-import {Drawer} from 'react-native-drawer-layout';
+
+import InterfaceHeader from '../../../../Components/InterfaceHeader';
 
 const Restaurant_Home = ({navigation, setOpen, open}) => {
   const [restaurantAddress, setRestaurantAddress] = useState('');
@@ -41,22 +41,20 @@ const Restaurant_Home = ({navigation, setOpen, open}) => {
       setRestaurantName(name);
       setRestaurantAddress(address);
     } catch (error) {
-      console.log(error.code);
+      // console.log(error.code);
     }
   };
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.interfaceContainer}>
-        <Pressable onPress={toggleDrawer}>
-          <Image source={Icons.dashboard_Icon} style={style.headerIcon} />
-        </Pressable>
-        <View style={{flexDirection: 'row'}}>
-          <Image source={Icons.location_mark} style={style.headerIcon} />
-          <Text>{restaurantAddress.locality}</Text>
-        </View>
-        <Image source={Icons.email_outline} style={style.headerIcon} />
-      </View>
+      <InterfaceHeader
+        dashboardIcon
+        location
+        title="Area 7, Garki Abuja"
+        notifications
+        HandleDashboard={() => navigation.toggleDrawer()}
+        onNotification={() => navigation.navigate('Messages')}
+      />
       <Text style={styles.welcomeText}>Welcome, {restuarantName}</Text>
       <View style={styles.overviewContainer}>
         <View style={styles.card}>
