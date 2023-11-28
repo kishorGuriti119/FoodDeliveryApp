@@ -27,7 +27,7 @@ const RestaurantLandingPage = () => {
         screenOptions={({route}) => ({
           tabBarIcon: ({focused}) => {
             let icon;
-            if (route.name === 'Home') {
+            if (route.name === 'HomeScreen') {
               icon = focused ? Icons.Home_Focused : Icons.Home;
             } else if (route.name === 'Messages') {
               icon = focused ? Icons.email_focused : Icons.email_outline;
@@ -51,10 +51,7 @@ const RestaurantLandingPage = () => {
             color: 'gray',
           },
         })}>
-        <Tab.Screen
-          name="Home"
-          children={() => <Restaurant_Home open={open} setOpen={setOpen} />}
-        />
+        <Tab.Screen name="HomeScreen" component={Restaurant_Home} />
         <Tab.Screen name="Orders" component={Restaurant_Orders} />
         <Tab.Screen name="Messages" component={Restaurant_Messages} />
         <Tab.Screen name="Profile" component={Restaurant_Profile} />

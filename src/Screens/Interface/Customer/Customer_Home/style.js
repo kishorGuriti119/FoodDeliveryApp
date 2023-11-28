@@ -71,7 +71,7 @@ export const style = StyleSheet.create({
     fontFamily: 'Plus Jakarta Sans',
     fontSize: 16,
     fontWeight: '600',
-    lineHeight: 25,
+    lineHeight: 20,
   },
   popularPicContainer: {
     flexDirection: 'row',

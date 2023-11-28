@@ -38,7 +38,7 @@ const SignUp = ({navigation}) => {
     onSubmit: async values => {
       const {isValid, errors} = await ValidateSignUp(values);
       if (isValid & !isChecked) {
-        alert('agree Terms and Conditions');
+        alert('Agree Terms and Conditions');
         setIsChecked(true);
         return;
       }

@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import {style} from './style';
@@ -44,7 +45,8 @@ const Order_Preview = ({route, navigation}) => {
           <View style={style.title_and_quantity}>
             <Text style={style.item_title}>{item?.title}</Text>
             <View style={style.quantity_Container}>
-              <Pressable
+              <TouchableOpacity
+                activeOpacity={0.6}
                 hitslop={20}
                 disabled={itemQuantity <= parseInt(1)}
                 style={style.quantityAction}
@@ -52,15 +54,16 @@ const Order_Preview = ({route, navigation}) => {
                   setItemQuantity(itemQuantity => parseInt(itemQuantity - 1))
                 }>
                 <Text style={style.quantityIndex}>-</Text>
-              </Pressable>
+              </TouchableOpacity>
               <Text style={style.quantity}>{`X${itemQuantity}`}</Text>
-              <Pressable
+              <TouchableOpacity
+                activeOpacity={0.6}
                 style={style.quantityAction}
                 onPress={() =>
                   setItemQuantity(itemQuantity => parseInt(itemQuantity + 1))
                 }>
                 <Text style={style.quantityIndex}>+</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
           <Text>{item.price}</Text>
