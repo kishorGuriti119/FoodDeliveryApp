@@ -8,6 +8,7 @@ export const Icons = {
   location_mark: require('../assets/location_mark.png'),
   location_white: require('../assets/location_white.png'),
   country_code: require('../assets/country_code.png'),
+  cameraIcon: require('../assets/camera.png'),
 
   eye: require('../assets/eye.png'),
   closed_eye: require('../assets/eye_closed.png'),
@@ -55,4 +56,5 @@ export const Icons = {
 
   notificationIcon: require('../assets/notification.png'),
   logout: require('../assets/logout.png'),
+  paymentsIcon: require('../assets/paymentsIcon.png'),
 };

@@ -26,10 +26,12 @@ export const style = StyleSheet.create({
   profile_name: {
     color: colors.whiteText,
     fontSize: 20,
+    padding: 0,
   },
 
   profile_email: {
     color: colors.whiteText,
+    padding: 0,
     fontSize: 12,
   },
   drawerItemsContainer: {

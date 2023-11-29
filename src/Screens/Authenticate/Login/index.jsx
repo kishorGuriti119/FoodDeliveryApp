@@ -71,11 +71,20 @@ const Login = ({navigation}) => {
         try {
           const data = await Auth_service.userLogin(values);
           console.log(data);
-          const {accessToken, email, refreshToken,id} = data;
+          const {accessToken, email, refreshToken, id, userName} = data;
           const token = await AsyncStorage.setItem('token', accessToken);
           const userId = await AsyncStorage.setItem('userid', id);
           let role = await getRoleofTheUser(accessToken);
-          let userData = {token: accessToken, role: role};
+          let userData = {
+            token: accessToken,
+            role: role,
+            email: email,
+            userName: userName,
+          };
+          const userInfo = await AsyncStorage.setItem(
+            'userInfo',
+            JSON.stringify(userData),
+          );
           navigation.navigate('dashboardNavigations', userData);
         } catch (error) {
           if (error.code === 'ECONNABORTED') {
