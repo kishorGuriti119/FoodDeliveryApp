@@ -55,4 +55,5 @@ export const Icons = {
 
   notificationIcon: require('../assets/notification.png'),
   logout: require('../assets/logout.png'),
+  cart:require('../assets/cart.png'),
 };
