@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, ScrollView, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../../../Components/Button';
+import EditableInput from '../../../../Components/EditableInput';
 import {launchImageLibrary} from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
+import InterfaceHeader from '../../../../Components/InterfaceHeader';
+import {style} from './style';
+import {Icons} from '../../../../Utility/Icons';
+import {colors} from '../../../../Utility/Colors';
 
 const Restaurant_Profile = ({navigation}) => {
   const onLogut = async () => {
@@ -21,82 +26,42 @@ const Restaurant_Profile = ({navigation}) => {
     navigation.navigate('login');
   };
 
-  const [token, setToken] = useState('');
-  const [preview, setPreview] = useState(null);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  // const [restuarantID, setRestuarantID] = useState(
-  //   '44487ffd-cd6b-4ab1-9d7f-90529de99a4f',
-  // );
-
-  const createFormData = (selectedPhoto, body = {}) => {
-    const data = new FormData();
-
-    data.append('image', {
-      name: selectedPhoto.fileName,
-      type: selectedPhoto.type,
-      uri:
-        Platform.OS === 'ios'
-          ? selectedPhoto.uri.replace('file://', '')
-          : selectedPhoto.uri,
-    });
-
-    Object.keys(body).forEach(key => {
-      data.append(key, body[key]);
-    });
-
-    console.log(data);
-    return data;
-  };
-
   useEffect(() => {
-    const getToken = async () => {
-      let Storedtoken = await AsyncStorage.getItem('token');
-      if (Storedtoken !== null) {
-        setToken(Storedtoken);
-      }
-    };
-    getToken();
-  }, [token]);
-
-  const uploadImage = async () => {
-    fetch(`http://10.0.2.2:8082/api/restaurant/menu`, {
-      method: 'POST',
-      body: createFormData(selectedPhoto, {
-        restaurantId: '44487ffd-cd6b-4ab1-9d7f-90529de99a4f',
-        name: 'chicken',
-        description: 'most popular food these days',
-        price: '290',
-      }),
-    })
-      .then(response => response.json())
-      .then(response => {
-        console.log('response', response);
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-  };
-
-  const choosePhoto = async () => {
-    let response = await launchImageLibrary();
-    setSelectedPhoto(response);
-    setPreview(response.assets[0].uri);
-  };
+    // need to get the user info
+  }, []);
 
   return (
-    <View>
-      <Button title="uploadImage" onPress={uploadImage} />
-      <Button title="logout" onPress={onLogut} />
-      <Button title="choose" onPress={choosePhoto} />
-      {preview && (
-        <Image
-          source={{
-            uri: preview,
-          }}
-          style={{height: 200, width: 200}}
-        />
-      )}
-    </View>
+    <ScrollView style={style.container}>
+      <InterfaceHeader
+        dashboardIcon
+        location
+        title="Area 7, Garki Abuja"
+        notifications
+        HandleDashboard={() => navigation.toggleDrawer()}
+        onNotification={() => navigation.navigate('Messages')}
+      />
+      <View style={style.profileContainer}>
+        <View style={style.imageContainer}>
+          <Image source={Icons.customer_Profile} style={style.profile_image} />
+          <Pressable hitSlop={20}>
+            <Image source={Icons.cameraIcon} style={style.camIcon} />
+          </Pressable>
+        </View>
+        <View style={style.profile}>
+          <Text
+            style={{fontSize: 16, fontWeight: 'bold', color: colors.secondary}}>
+            Profile
+          </Text>
+        </View>
+      </View>
+      <View style={style.editableContainer}>
+        <EditableInput Icon={Icons.user} label="FullName" />
+        <EditableInput Icon={Icons.email_outline} label="Email" />
+        <EditableInput Icon={Icons.mobile} label="Phone number" />
+        <EditableInput Icon={Icons.location_mark} label="Location" />
+        <EditableInput Icon={Icons.paymentsIcon} label="Payment card" />
+      </View>
+    </ScrollView>
   );
 };
 export default Restaurant_Profile;
