@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, Image, Switch, Pressable} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image, Switch, Pressable, TextInput} from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -15,11 +15,14 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Modified_Drawer = props => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
   const onLogout = async () => {
     let token = await AsyncStorage.getItem('token');
     if (token) {
       console.log('token from backend');
       await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('userInfo');
       props.navigation.navigate('login');
     } else {
       await GoogleSignin.revokeAccess();
@@ -29,15 +32,31 @@ const Modified_Drawer = props => {
     props.navigation.navigate('login');
   };
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      let userdetails = await AsyncStorage.getItem('userInfo');
+      userdetails = JSON.parse(userdetails);
+      setUserInfo(userdetails);
+    };
+
+    getUserInfo();
+  }, []);
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={style.drawerHeader}>
         <Image source={Icons.customer_Profile} style={style.profileImage} />
         <View style={style.profileContainer}>
-          <Text style={style.profile_name}>Kishor Guriti</Text>
-          <Text style={style.profile_email}>
-            kishior.guriti@motivitylabs.com
-          </Text>
+          <TextInput
+            editable={false}
+            style={style.profile_name}
+            value={userInfo.userName}
+          />
+          <TextInput
+            editable={false}
+            style={style.profile_email}
+            value={userInfo.email}
+          />
         </View>
       </View>
       <Card style={style.card}>

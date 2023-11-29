@@ -23,15 +23,14 @@ export const style = StyleSheet.create({
     marginHorizontal: 20,
   },
   special_card_container: {
-    height: 160,
-    marginVertical: 24,
+    minHeightheight: 160,
+    marginVertical: 12,
   },
   specialCard: {
-    height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
+    padding: 12,
     position: 'relative',
   },
   special_card_image: {
