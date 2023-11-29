@@ -13,9 +13,37 @@ import {style} from './style';
 import {Icons} from '../../../../Utility/Icons';
 import {colors} from '../../../../Utility/Colors';
 import Button from '../../../../Components/Button';
+import { addToCart } from '../../../../Store/Slices/CartReducer';
+import { useDispatch,useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+
 const Order_Preview = ({route, navigation}) => {
+  const cart = useSelector((state)=> state.cart.cart)
+  const dispatch = useDispatch()
   const [itemQuantity, setItemQuantity] = useState(parseInt(1));
+  const [isCart,setIsCart] = useState(true)
   const {item} = route?.params;
+
+  const filterCartItems = (cart)=>{
+    const isItem = cart.filter((items)=> items.id === item.id )
+    console.log(isItem)
+    if(isItem.length>0){
+      setIsCart(false)
+    }else{
+      setIsCart(true)
+    }
+  }
+  useEffect(()=>{
+    filterCartItems(cart)
+  },[cart])
+
+  const handleAddItem = ()=>{
+    console.log(item, "dispatch")
+    dispatch(addToCart(item))
+    
+  }
+
   return (
     <ScrollView style={style.container}>
       <ImageBackground source={item.itemImage} style={style.backgroundImg}>
@@ -55,7 +83,7 @@ const Order_Preview = ({route, navigation}) => {
                 }>
                 <Text style={style.quantityIndex}>-</Text>
               </TouchableOpacity>
-              <Text style={style.quantity}>{`X${itemQuantity}`}</Text>
+              <Text style={style.quantity}>{cart.length > 0 ?cart[0].quantity:""}</Text>
               <TouchableOpacity
                 activeOpacity={0.6}
                 style={style.quantityAction}
@@ -91,7 +119,7 @@ const Order_Preview = ({route, navigation}) => {
             </Text>
           </View>
           <View>
-            <Button title={`Place order X${itemQuantity}`} />
+            {isCart && <Button title={`Place order X${itemQuantity}`} onPress={handleAddItem}/>}
           </View>
         </View>
       </View>
