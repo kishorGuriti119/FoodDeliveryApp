@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { FlatList } from 'react-native'
 import InterfaceHeader from '../../../../Components/InterfaceHeader'
-
+import ShowFlatList from '../../../../Components/ShowFlatList'
 
 const Customer_Cart = ({ navigation }) => {
   const cart = useSelector((state) => state.cart.cart)
@@ -17,16 +17,19 @@ const Customer_Cart = ({ navigation }) => {
   );
 
   return (
-    <View>
+    <View style={{paddingHorizontal:8}}>
       <InterfaceHeader
         PreviousPage
         onPress={() => navigation.goBack()}
       />
-      <FlatList
-        data={cart}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      
+        <ShowFlatList
+          data={cart}
+          cartItemType
+          horizontal={false}
+        />
+     
+
     </View>
 
   )

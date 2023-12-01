@@ -56,7 +56,8 @@ const Customer_Home = ({navigation}) => {
         <ShowFlatList
           data={Order_category}
           defaultSelected="Popular"
-          categoryType
+  showHorizontal
+          categoryType 
         />
 
         <View style={style.special_card_container}>
@@ -101,6 +102,8 @@ const Customer_Home = ({navigation}) => {
             data={FoodItemsData}
             foodItemsType
             onFoodItemClick={onFoodItemClick}
+  showHorizontal
+            
           />
         )}
 
