@@ -45,7 +45,7 @@ const ShowFlatList = ({
 
     if (cartItemType) {
       return (
-          <CartItem item={item} />
+        <CartItem item={item} key={item.id}/>
       )
     }
   };
@@ -56,7 +56,7 @@ const ShowFlatList = ({
         showsHorizontalScrollIndicator={false}
         data={data}
         style={{ marginVertical: 24 }}
-       horizontal={showHorizontal}
+        horizontal={showHorizontal}
         renderItem={renderList}
         keyExtractor={(item, index) => index}
       />

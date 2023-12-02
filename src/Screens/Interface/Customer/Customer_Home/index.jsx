@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -9,18 +9,18 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {style} from './style';
+import { style } from './style';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
-import {Order_category} from '../../../../Utility/Flatlist_data';
+import { Order_category } from '../../../../Utility/Flatlist_data';
 import FlatList_box from '../../../../Components/Flat_List_Box';
 import ShowFlatList from '../../../../Components/ShowFlatList';
-import {Icons} from '../../../../Utility/Icons';
-import {colors} from '../../../../Utility/Colors';
+import { Icons } from '../../../../Utility/Icons';
+import { colors } from '../../../../Utility/Colors';
 import SearchInput from '../../../../Components/SearchInput';
-import {FoodItems} from '../../../../Utility/Flatlist_data';
+import { FoodItems } from '../../../../Utility/Flatlist_data';
 import NoData from '../../../../Components/NoData';
 
-const Customer_Home = ({navigation}) => {
+const Customer_Home = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [FoodItemsData, setFoodItemsData] = useState(FoodItems);
 
@@ -36,7 +36,7 @@ const Customer_Home = ({navigation}) => {
   }, [searchKeyWord]);
 
   const onFoodItemClick = item => {
-    navigation.navigate('orderPreview', {item});
+    navigation.navigate('orderPreview', { item });
   };
 
   return (
@@ -56,8 +56,8 @@ const Customer_Home = ({navigation}) => {
         <ShowFlatList
           data={Order_category}
           defaultSelected="Popular"
-  showHorizontal
-          categoryType 
+          showHorizontal
+          categoryType
         />
 
         <View style={style.special_card_container}>
@@ -102,8 +102,8 @@ const Customer_Home = ({navigation}) => {
             data={FoodItemsData}
             foodItemsType
             onFoodItemClick={onFoodItemClick}
-  showHorizontal
-            
+            showHorizontal
+
           />
         )}
 
@@ -119,6 +119,7 @@ const Customer_Home = ({navigation}) => {
           <ShowFlatList
             data={FoodItemsData}
             foodItemsType
+            showHorizontal
             onFoodItemClick={item => onFoodItemClick(item)}
           />
         )}
