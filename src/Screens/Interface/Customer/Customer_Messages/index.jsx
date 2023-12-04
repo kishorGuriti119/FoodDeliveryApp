@@ -13,6 +13,7 @@ const Customer_Messages = ({navigation}) => {
         HandleDashboard={() => navigation.openDrawer()}
       />
       <Text>Customer_Messages</Text>
+      
     </View>
   );
 };

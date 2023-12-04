@@ -12,6 +12,7 @@ import {Card} from 'react-native-paper';
 import SwitchToggle from 'react-native-switch-toggle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import ProfileProgressCircular from '../../../../Components/ProfileProgress';
 
 const Modified_Drawer = props => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -45,6 +46,7 @@ const Modified_Drawer = props => {
   return (
     <DrawerContentScrollView {...props}>
       <View style={style.drawerHeader}>
+        <ProfileProgressCircular />
         <Image source={Icons.customer_Profile} style={style.profileImage} />
         <View style={style.profileContainer}>
           <TextInput

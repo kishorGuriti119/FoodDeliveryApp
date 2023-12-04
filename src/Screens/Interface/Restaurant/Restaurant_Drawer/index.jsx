@@ -1,7 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-// import Modified_Drawer from '../Modified_Drawer';
-import Modified_Drawer from '../../Customer/Modified_Drawer';
+import Modified_Drawer from '../Modified_Drawer';
 import {colors} from '../../../../Utility/Colors';
 import {Icons} from '../../../../Utility/Icons';
 import {Image} from 'react-native';

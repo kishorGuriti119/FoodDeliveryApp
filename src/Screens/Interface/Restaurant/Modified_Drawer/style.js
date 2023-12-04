@@ -14,11 +14,12 @@ export const style = StyleSheet.create({
     padding: 12,
   },
   profileImage: {
-    height: 100,
-    width: 100,
+    height: 105,
+    width: 105,
     borderColor: colors.whiteText,
     borderWidth: 2,
     borderRadius: 100,
+    marginLeft:-128
   },
   profileContainer: {
     flex: 1,

@@ -1,12 +1,14 @@
-import React from 'react';
-import {View ,Text} from 'react-native';
+
+import {Text} from 'react-native'
 
 const Restaurant_Messages = () => {
+
   return (
-    <View>
-      <Text>Restaurant_Messages</Text>
-    </View>
+    <>
+    <Text>Restaurant_Messages</Text>
+    </>
   );
 };
+
 
 export default Restaurant_Messages;
