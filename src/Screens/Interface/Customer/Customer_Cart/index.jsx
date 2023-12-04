@@ -71,7 +71,7 @@ const Customer_Cart = ({ navigation }) => {
             subtitle="Total Price"
           />
           <Card.Actions style={{ marginLeft: 'auto' }}>
-            <Button mode="contained-tonal">Place Order</Button>
+            <Button mode="contained-tonal" onPress={()=>navigation.navigate('OrderOnTheWay')}>Place Order</Button>
           </Card.Actions>
         </View>
       </Card>
