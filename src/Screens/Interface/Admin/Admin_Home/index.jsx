@@ -6,11 +6,13 @@ import {
   ImageBackground,
   Pressable,
   BackHandler,
+  ScrollView
 } from 'react-native';
 import {style} from './style';
 import {Icons} from '../../../../Utility/Icons';
 import Button from '../../../../Components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Admin_Home = ({navigation}) => {
   const navigetToRestarauantForm = () => {
@@ -23,6 +25,7 @@ const Admin_Home = ({navigation}) => {
 
   return (
     <SafeAreaView>
+    <ScrollView>
       <View>
         <Button title="open drawer" onPress={() => navigation.openDrawer()} />
       </View>
@@ -56,6 +59,7 @@ const Admin_Home = ({navigation}) => {
           </ImageBackground>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
