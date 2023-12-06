@@ -74,9 +74,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.fooddeliverymvp"
+    namespace "com.motivity.fooddeliveryapp"
     defaultConfig {
-        applicationId "com.fooddeliverymvp"
+        applicationId "com.motivity.fooddeliveryapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

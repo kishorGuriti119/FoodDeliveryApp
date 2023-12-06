@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "601443215006",
-    "project_id": "fooddeliveryapp-404810",
-    "storage_bucket": "fooddeliveryapp-404810.appspot.com"
+    "project_number": "635915422365",
+    "project_id": "fda-reactnative",
+    "storage_bucket": "fda-reactnative.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:601443215006:android:6751c09ca5c4e4bdf57d8f",
+        "mobilesdk_app_id": "1:635915422365:android:f884d58e7bb83d9914a274",
         "android_client_info": {
-          "package_name": "com.fooddeliverymvp"
+          "package_name": "com.motivity.fooddeliveryapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "601443215006-avrrlumrtndfjvadqcn7dhakknv04dqc.apps.googleusercontent.com",
+          "client_id": "635915422365-rtldfem7f11mo7urn1cpff6q1kplmr71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.motivity.fooddeliveryapp",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "635915422365-lgtumu1lu0he8i8bckit1gvr82klqr8n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzGXAIb7asNbTABlZQ0_HeOy4qIBl2YfY"
+          "current_key": "AIzaSyBzh1NoE6df7E5UkRxk6yn0iGoxN0QvKk0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "601443215006-avrrlumrtndfjvadqcn7dhakknv04dqc.apps.googleusercontent.com",
+              "client_id": "635915422365-lgtumu1lu0he8i8bckit1gvr82klqr8n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
