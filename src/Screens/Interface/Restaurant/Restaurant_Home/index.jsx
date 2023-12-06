@@ -115,6 +115,11 @@ const Restaurant_Home = ({navigation, setOpen, open}) => {
           </Pressable>
         </View>
       </View>
+      <Pressable onPress={()=>navigation.navigate('Additem')}>
+            <Text style={[styles.easyNavigationText, {color: colors.primary}]}>
+              Add Item
+            </Text>
+          </Pressable>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-package com.fooddeliverymvp;
+package com.motivity.fooddeliveryapp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

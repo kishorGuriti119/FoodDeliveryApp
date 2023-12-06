@@ -9,6 +9,7 @@ import {Image, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SideBarContent from '../../../../Components/SideBar/SideBarLayout';
 import {Drawer} from 'react-native-drawer-layout';
+import Restaurant_Home_Stack from '../Restaurant_Home_Stack';
 const Tab = createBottomTabNavigator();
 
 const RestaurantLandingPage = () => {
@@ -51,7 +52,7 @@ const RestaurantLandingPage = () => {
             color: 'gray',
           },
         })}>
-        <Tab.Screen name="HomeScreen" component={Restaurant_Home} />
+        <Tab.Screen name="HomeScreen" component={Restaurant_Home_Stack} />
         <Tab.Screen name="Orders" component={Restaurant_Orders} />
         <Tab.Screen name="Messages" component={Restaurant_Messages} />
         <Tab.Screen name="Profile" component={Restaurant_Profile} />
