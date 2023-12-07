@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Button, Image, View,Alert } from 'react-native';
+import { Button, Image, View, Alert ,ActivityIndicator} from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import Input from '../../../../Components/Input';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import { useFormik } from 'formik';
 import Auth_service from '../../../../Services/Auth_service';
-import { CustomFireStorage } from '../../../../Components/FireStore';
 import storage from '@react-native-firebase/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddItem = ({ navigation }) => {
+    const [downloadUrl,setDownloadUrl] = useState(null)
+    const [showPickImage,setShowPickImage] = useState(false)
 
-    
-    const [imageUri, setImageUri] = useState(null);
+   
+
 
     const formik = useFormik({
         initialValues: {
@@ -24,7 +26,6 @@ const AddItem = ({ navigation }) => {
             console.log(values)
             const res = await Auth_service.userSignUp(values)
             console.log(res)
-            
 
         },
     });
@@ -74,53 +75,56 @@ const AddItem = ({ navigation }) => {
     //     });
     // }
 
-    const pickImage = () => {
+    const pickImage = async () => {
         const options = {
-          mediaType: 'photo',
-          includeBase64: false,
-          maxHeight: 2000,
-          maxWidth: 2000,
-      };
-    
-      launchImageLibrary(options, (response) => {
-          if (response.didCancel) {
-              console.log('User cancelled image picker');
-          } else if (response.error) {
-              console.log('Image picker error: ', response.error);
-          } else {
-              setImageUri(response.uri || response.assets?.[0]?.uri);
-              
-          }
-      });
-      };
-    
-      const uploadImage = async () => {
-        if (!imageUri) {
-          Alert.alert('No Image Selected', 'Please select an image before uploading.');
-          return;
-        }
-    
-        try {
-          const imageName = `image_${Date.now()}.jpg`;
-          const reference = storage().ref(`images/${imageName}`);
-          const response = await fetch(imageUri);
-          const blob = await response.blob();
-          await reference.put(blob);
-    
-          const downloadURL = await reference.getDownloadURL();
-          console.log('Download URL:', downloadURL);
-          formik.setFieldValue('image', downloadURL)
-          Alert.alert('Success', 'Image Upload Succesfully');
-          // You can now use the downloadURL as needed (e.g., save it to your database).
-        } catch (error) {
-          console.error('Image upload error:', error);
-          Alert.alert('Error', 'Failed to upload image. Please try again.');
-        }
-      };
+            mediaType: 'photo',
+            includeBase64: false,
+            maxHeight: 2000,
+            maxWidth: 2000,
+        };
+        const userId = await AsyncStorage.getItem('userid');
+        launchImageLibrary(options, async (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('Image picker error: ', response.error);
+            } else {
+                setShowPickImage(true)
+                console.log(userId)
+                const imageUri = response.uri || response.assets?.[0]?.uri;
+                if (!imageUri) {
+                    Alert.alert('No Image Selected', 'Please select an image before uploading.');
+                    return;
+                }
+        
+                try {
+                    const imageName = `${userId}_${Date.now()}.jpg`;
+                    const reference = storage().ref(`${userId}/${imageName}`);
+                    const response = await fetch(imageUri);
+                    const blob = await response.blob();
+                    await reference.put(blob);
+        
+                    const downloadURL = await reference.getDownloadURL();
+                    console.log('Download URL:', downloadURL);
+                    setDownloadUrl(downloadURL)
+                    formik.setFieldValue('image', downloadURL)
+                    setShowPickImage(false)
+                    // Alert.alert('Success', 'Image Upload Succesfully');
+                    // You can now use the downloadURL as needed (e.g., save it to your database).
+                } catch (error) {
+                    console.error('Image upload error:', error);
+                    Alert.alert('Error', 'Failed to upload image. Please try again.');
+                }
+            }
+        });
+
+        
+    };
+
 
 
     return (
-        <View style={{ flex: 1, paddingHorizontal: 16 }}>
+        <View style={{ flex: 1, paddingHorizontal: 24 }}>
             <InterfaceHeader onBackPress={() => navigation.navigate('Home')} PreviousPage />
             <View style={{ flex: 1, justifyContent: 'center', }}>
                 <Input
@@ -138,19 +142,13 @@ const AddItem = ({ navigation }) => {
                     placeholder="Enter Item Price"
                     onChangeText={formik.handleChange('price')}
                 />
-                {/* <View style={{ marginTop: 20 }}>
-                    <Button title="Image" onPress={openImagePicker} />
-                </View> */}
-                {/* <View style={{ marginTop: 20, marginBottom: 50 }}>
-                    <Button title="Open Camera" onPress={handleCameraLaunch} />
-                </View> */}
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    {imageUri && <Image source={{ uri: imageUri }} style={{ width: 150, height: 150, marginBottom: 20 }} />}
-                    <Button title="Pick Image" onPress={pickImage} />
-                    <Button title="Upload Image" onPress={uploadImage} />
+                <View style={{ justifyContent: 'center', alignItems: 'center', rowGap: 10 }}>
+                    {downloadUrl && <Image source={{ uri: downloadUrl }} style={{ width: 150, height: 150, marginBottom: 20 }} />}
+                    {showPickImage ? <ActivityIndicator size="large" color="red" />:""}
+                    <Button title="Pick Image" onPress={pickImage} disabled={showPickImage}/>
                 </View>
                 <View style={{ marginTop: 20, marginBottom: 50 }}>
-                    <Button title="Submit" onPress={formik.handleSubmit} />
+                    <Button title="Submit" onPress={formik.handleSubmit} disabled={showPickImage}/>
                 </View>
             </View>
 
