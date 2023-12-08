@@ -56,3 +56,13 @@ export const ResetPasswordSchema = Yup.object().shape({
     .min(8, 'password must be greater than 7 characters')
     .required('please set new passsword'),
 });
+
+
+export const AddressSchema = Yup.object().shape({
+  name: Yup.string().required('*required'),
+  mobile: Yup.string()
+    .matches(/^[0-9]{10}$/, 'Invalid mobile number')
+    .required('*required'),
+  plot:Yup.string().required('*required'),
+  area:Yup.string().required('*required'),
+});

@@ -11,6 +11,7 @@ import {colors} from '../../../../Utility/Colors';
 import {Icons} from '../../../../Utility/Icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native';
+import Customer_Adresses from '../Customer_Adresses';
 
 const Drawer = createDrawerNavigator();
 
@@ -67,6 +68,20 @@ const Customer_Drawer = () => {
               <Image
                 source={Icons.email_outline}
                 style={{width: 24, height: 27}}
+              />
+            );
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="Addresses"
+        component={Customer_Adresses}
+        options={{
+          drawerIcon: ({color}) => {
+            return (
+              <Image
+                source={Icons.custom_user}
+                style={{width: 26, height: 30}}
               />
             );
           },
