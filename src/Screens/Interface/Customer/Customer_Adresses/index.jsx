@@ -33,7 +33,13 @@ const Customer_Adresses = ({ navigation }) => {
     })
     return (
         <View style={styles.mainContainer}>
-            <InterfaceHeader PreviousPage onBackPress={() => navigation.navigate("Home")} />
+            <InterfaceHeader
+                PreviousPage
+                notifications
+                onBackPress={() => navigation.goBack()}
+                onNotification={() => navigation.navigate('Messages')}
+                title="Your Addresses"
+            />
             <View style={styles.formContainer}>
                 <Input label="Recepient Name"
                     placeholder="Enter Name"

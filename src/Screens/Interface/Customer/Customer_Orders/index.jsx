@@ -12,12 +12,11 @@ const Customer_Orders = ({navigation}) => {
       <InterfaceHeader
         PreviousPage
         notifications
-        onPress={() => navigation.goBack()}
+        onBackPress={() => navigation.goBack()}
         onNotification={() => navigation.navigate('Messages')}
+        title="Your Orders"
       />
-      <View style={style.title}>
-        <Text style={style.titleText}>Your Orders</Text>
-      </View>
+      
       <ShowFlatList data={Order_status} defaultSelected="Pending" />
     </View>
   );

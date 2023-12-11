@@ -4,10 +4,8 @@ import {colors} from '../../../../Utility/Colors';
 
 export const style = StyleSheet.create({
   headerPosition: {
-    position: 'absolute',
-    top: 6,
-    width: width,
-    padding: 24,
+    paddingHorizontal:16,
+    paddingVertical:16
   },
   customBack: {
     backgroundColor: colors.custominputBorder,
@@ -109,4 +107,7 @@ export const style = StyleSheet.create({
     color: colors.secondary,
     marginBottom: 6,
   },
+  container:{
+    
+  }
 });

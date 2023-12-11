@@ -4,8 +4,8 @@ import {colors} from '../../../../Utility/Colors';
 
 export const style = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 36,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     backgroundColor: colors.whiteText,
     minHeight: height,
   },

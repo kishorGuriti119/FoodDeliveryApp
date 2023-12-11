@@ -1,10 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {style} from './style'
+import InterfaceHeader from '../../../../Components/InterfaceHeader';
 
 const Customer_Favourites = () => {
   return (
-    <View>
-      <Text>Customer_Favourites</Text>
+    <View style={style.container}>
+      <InterfaceHeader
+        PreviousPage
+        notifications
+        onBackPress={() => navigation.goBack()}
+        onNotification={() => navigation.navigate('Messages')}
+        title="Your Favourites"
+      />
+      
     </View>
   );
 };

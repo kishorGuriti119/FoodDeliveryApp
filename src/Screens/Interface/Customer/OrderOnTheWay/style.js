@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     mainContainer:{
         backgroundColor:"#ffffff",
         flex:1
+        
 
     },
     onthewayContainer:{

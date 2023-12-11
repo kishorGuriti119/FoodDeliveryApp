@@ -1,16 +1,17 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
+import {style} from './style'
 
 const Customer_Notifications = ({navigation}) => {
   return (
-    <View>
+    <View style={style.container}>
       <InterfaceHeader
-        dashboardIcon
-        location
-        title="Area 7, Garki Abuja"
+        PreviousPage
         notifications
-        HandleDashboard={() => navigation.openDrawer()}
+        onBackPress={() => navigation.goBack()}
+        onNotification={() => navigation.navigate('Messages')}
+        title="Your Notifications"
       />
       <Text>Notifications</Text>
     </View>

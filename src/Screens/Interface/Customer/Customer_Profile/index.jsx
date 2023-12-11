@@ -5,6 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
+import InterfaceHeader from '../../../../Components/InterfaceHeader';
+import {style} from './style'
+
 const baseURL = 'http://10.0.2.2:3001';
 const Customer_Profile = ({navigation}) => {
   const onLogout = async () => {
@@ -24,7 +27,14 @@ const Customer_Profile = ({navigation}) => {
   // Your image data
 
   return (
-    <View>
+    <View style={style.container}>
+       <InterfaceHeader
+        PreviousPage
+        notifications
+        onBackPress={() => navigation.goBack()}
+        onNotification={() => navigation.navigate('Messages')}
+        title="Your Profile"
+      />
       <Button title="logout" onPress={onLogout} />
     </View>
   );
