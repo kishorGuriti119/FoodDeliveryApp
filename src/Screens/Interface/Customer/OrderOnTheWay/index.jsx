@@ -8,10 +8,6 @@ import InterfaceHeader from '../../../../Components/InterfaceHeader'
 const OrderOnTheWay = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
-            <InterfaceHeader
-                PreviousPage
-                onBackPress={() => navigation.navigate('HomeScreen')}
-            />
             <View style={styles.onthewayContainer}>
                 <Image source={require('../../../../assets/splash_screen_slide_3.png')} style={{
                     width: 320,

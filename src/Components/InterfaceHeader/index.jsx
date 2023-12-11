@@ -52,8 +52,13 @@ const InterfaceHeader = ({
           </Text>
         </Pressable>
       ) : (
-        <Text></Text>
-      )}
+        <Text
+            style={
+              style.mystyle
+            }>
+            {title}
+          </Text>
+      )} 
 
       {notifications ? (
         <Pressable onPress={onNotification}>

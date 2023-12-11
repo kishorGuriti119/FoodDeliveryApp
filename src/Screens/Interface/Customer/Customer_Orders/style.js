@@ -4,13 +4,11 @@ import {colors} from '../../../../Utility/Colors';
 
 export const style = StyleSheet.create({
   container: {
-    paddingHorizontal: 24,
-    paddingVertical: 36,
-    height: height,
-    backgroundColor: colors.whiteText,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
   title: {
-    marginTop: 47,
+    marginTop: 10,
   },
   titleText: {
     fontSize: 20,

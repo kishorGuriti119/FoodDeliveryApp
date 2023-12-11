@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Image, View, Alert ,ActivityIndicator} from 'react-native';
+import { Button, Image, View, Alert, ActivityIndicator } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import Input from '../../../../Components/Input';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
@@ -7,12 +7,12 @@ import { useFormik } from 'formik';
 import Auth_service from '../../../../Services/Auth_service';
 import storage from '@react-native-firebase/storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { style } from './style'
 const AddItem = ({ navigation }) => {
-    const [downloadUrl,setDownloadUrl] = useState(null)
-    const [showPickImage,setShowPickImage] = useState(false)
+    const [downloadUrl, setDownloadUrl] = useState(null)
+    const [showPickImage, setShowPickImage] = useState(false)
 
-   
+
 
 
     const formik = useFormik({
@@ -96,14 +96,14 @@ const AddItem = ({ navigation }) => {
                     Alert.alert('No Image Selected', 'Please select an image before uploading.');
                     return;
                 }
-        
+
                 try {
                     const imageName = `${userId}_${Date.now()}.jpg`;
                     const reference = storage().ref(`${userId}/${imageName}`);
                     const response = await fetch(imageUri);
                     const blob = await response.blob();
                     await reference.put(blob);
-        
+
                     const downloadURL = await reference.getDownloadURL();
                     console.log('Download URL:', downloadURL);
                     setDownloadUrl(downloadURL)
@@ -118,13 +118,13 @@ const AddItem = ({ navigation }) => {
             }
         });
 
-        
+
     };
 
 
 
     return (
-        <View style={{ flex: 1, paddingHorizontal: 24 }}>
+        <View style={style.container}>
             <InterfaceHeader onBackPress={() => navigation.navigate('Home')} PreviousPage />
             <View style={{ flex: 1, justifyContent: 'center', }}>
                 <Input
@@ -144,11 +144,11 @@ const AddItem = ({ navigation }) => {
                 />
                 <View style={{ justifyContent: 'center', alignItems: 'center', rowGap: 10 }}>
                     {downloadUrl && <Image source={{ uri: downloadUrl }} style={{ width: 150, height: 150, marginBottom: 20 }} />}
-                    {showPickImage ? <ActivityIndicator size="large" color="red" />:""}
-                    <Button title="Pick Image" onPress={pickImage} disabled={showPickImage}/>
+                    {showPickImage ? <ActivityIndicator size="large" color="red" /> : ""}
+                    <Button title="Pick Image" onPress={pickImage} disabled={showPickImage} />
                 </View>
                 <View style={{ marginTop: 20, marginBottom: 50 }}>
-                    <Button title="Submit" onPress={formik.handleSubmit} disabled={showPickImage}/>
+                    <Button title="Submit" onPress={formik.handleSubmit} disabled={showPickImage} />
                 </View>
             </View>
 

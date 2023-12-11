@@ -5,6 +5,7 @@ import { Card, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import ShowFlatList from '../../../../Components/ShowFlatList';
+import { style } from './style'
 
 const Customer_Cart = ({ navigation }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -30,19 +31,19 @@ const Customer_Cart = ({ navigation }) => {
   }, [cart]);
 
   return (
-    <View style={{ paddingHorizontal: 8 }}>
+    <View style={style.container}>
       <InterfaceHeader
         PreviousPage
         onBackPress={() => navigation.navigate('HomeScreen')}
       />
-      <View style={{height:480,paddingHorizontal:10}}>
-      <ShowFlatList
-        data={cart}
-        cartItemType
-        horizontal={false}
-      />
+      <View style={{ height: 476}}>
+        <ShowFlatList
+          data={cart}
+          cartItemType
+          horizontal={false}
+        />
       </View>
-      <Card style={{ marginVertical: 10 }}>
+      <Card style={{ marginVertical: 5}}>
         <Card.Content>
           <Text variant="titleLarge">{userName}</Text>
           <Text variant="bodyMedium">
@@ -71,7 +72,7 @@ const Customer_Cart = ({ navigation }) => {
             subtitle="Total Price"
           />
           <Card.Actions style={{ marginLeft: 'auto' }}>
-            <Button mode="contained-tonal" onPress={()=>navigation.navigate('OrderOnTheWay')}>Place Order</Button>
+            <Button mode="contained-tonal" onPress={() => navigation.navigate('OrderOnTheWay')}>Place Order</Button>
           </Card.Actions>
         </View>
       </Card>

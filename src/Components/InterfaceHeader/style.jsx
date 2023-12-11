@@ -47,4 +47,9 @@ export const style = StyleSheet.create({
     height: 11.5,
     width: 5.5,
   },
+  mystyle:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:colors.secondary
+  }
 });

@@ -1,12 +1,8 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { StyleSheet } from "react-native";
 
-const styles = () => {
-  return (
-    <View>
-      <Text>styles</Text>
-    </View>
-  )
-}
-
-export default styles
+export const style = StyleSheet.create({
+  container:{
+    paddingHorizontal:16,
+    paddingVertical:16
+  }
+})
