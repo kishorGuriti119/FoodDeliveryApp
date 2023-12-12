@@ -7,18 +7,53 @@ import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import ShowFlatList from '../../../../Components/ShowFlatList';
 import { style } from './style'
 
-const Customer_Cart = ({ navigation }) => {
+const Customer_Cart = ({ route, navigation }) => {
+  const { data } = route.params
+
+  const getCartValue = () => {
+    console.log("Called useEffect");
+    console.log("data:", data);
+    console.log("total:", total);
+    if (data) {
+      console.log(data)
+      switch (data.type) {
+        case "FLAT":
+          if (data.minValue < total) {
+            setTotal((prev) => Math.ceil(prev - data.price))
+          }
+          break;
+        case "UPTO":
+          if (data.minValue < total) {
+            const discountLimit = Math.ceil(total / 100) * data.percentage
+            if (discountLimit < data.price) {
+              setTotal((prev) => Math.ceil(prev - discountLimit))
+            } else {
+              setTotal((prev) => prev - data.price)
+            }
+          }
+          break;
+        case "DISCOUNT":
+
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
+
   const cart = useSelector((state) => state.cart.cart);
   const [userName, setUserName] = useState('');
   const [total, setTotal] = useState('');
-  
+
 
   const getTotalPrice = () => {
     let totalPrice = 0;
     cart.forEach((item) => {
       totalPrice += item.quantity * item.price;
     });
-    setTotal(totalPrice);
+    setTotal(Math.ceil(totalPrice));
   };
 
   useEffect(() => {
@@ -29,8 +64,9 @@ const Customer_Cart = ({ navigation }) => {
     };
     getUserInfo();
     getTotalPrice();
+    getCartValue()
 
-  }, [cart]);
+  }, [cart, data, total]);
 
   return (
     <View style={style.container}>
@@ -38,14 +74,17 @@ const Customer_Cart = ({ navigation }) => {
         PreviousPage
         onBackPress={() => navigation.navigate('HomeScreen')}
       />
-      <View style={{ height: 476}}>
+      <View style={{ height: 436 }}>
         <ShowFlatList
           data={cart}
           cartItemType
           horizontal={false}
         />
       </View>
-      <Card style={{ marginVertical: 5}}>
+      <Button mode="text" onPress={() => navigation.navigate("Coupons")}>
+        View Coupons
+      </Button>
+      <Card style={{ marginVertical: 5 }}>
         <Card.Content>
           <Text variant="titleLarge">{userName}</Text>
           <Text variant="bodyMedium">

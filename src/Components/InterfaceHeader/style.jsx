@@ -50,6 +50,6 @@ export const style = StyleSheet.create({
   mystyle:{
     fontSize:20,
     fontWeight:"bold",
-    color:colors.secondary
+    color:colors.secondary,
   }
 });
