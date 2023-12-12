@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Input from '../../../../Components/Input'
 import { styles } from './style'
@@ -7,10 +7,57 @@ import Button from '../../../../Components/Button'
 import { useFormik } from 'formik'
 import { Validate_UserAddress } from '../../../../Validations/InputValidation'
 import { globelstyle } from '../../../../Utility/GlobelStyles'
+import { Card } from 'react-native-paper'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const Customer_Adresses = ({ navigation }) => {
+export const Customer_Adresses = ({ navigation }) => {
+    const [addresses,setAddresses]= useState('')
+
+    useEffect(()=>{
+        const getAddresses = async ()=>{
+            let userAddresses = await AsyncStorage.getItem('addresses')
+            setAddresses(JSON.parse(userAddresses))
+          }
+          getAddresses()
+    })
+
+    return (
+        <View style={styles.mainContainer}>
+            <InterfaceHeader
+                PreviousPage
+                notifications
+                onBackPress={() => navigation.goBack()}
+                onNotification={() => navigation.navigate('Messages')}
+                title="Your Addresses"
+            />
+            <Button title="Add Address" onPress={() => navigation.navigate("AddAddress")} />
+            <Text style={globelstyle.subHeading}>Saved Addresses</Text>
+
+            <FlatList
+
+                data={addresses}
+                keyExtractor={(item,index) => index} // Use toString() to ensure the key is a string
+                renderItem={({ item }) => {
+                    return (
+                        <Card style={{ marginVertical: 5, marginHorizontal: 5 }}>
+                            <Card.Content>
+                                <Text variant="titleLarge">{item.plot}</Text>
+                                <Text variant="bodyMedium">
+                                    {item.area}
+                                </Text>
+                            </Card.Content>
+                        </Card>
+                    );
+                }}
+            />
+
+        </View>
+    )
+}
 
 
+
+export const Customer_AddAddress = ({ navigation }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -21,15 +68,29 @@ const Customer_Adresses = ({ navigation }) => {
         },
         onSubmit: async values => {
             const { isValid, errors } = await Validate_UserAddress(values);
+          
             if (isValid) {
-                console.log(values)
+              try {
+                const addresses = await AsyncStorage.getItem("addresses");
+                if (addresses) {
+                  // If addresses exist, parse and update the existing array
+                
+                  const existingAddresses = JSON.parse(addresses);
+                  existingAddresses.push(values);
+                  await AsyncStorage.setItem("addresses", JSON.stringify(existingAddresses));
+                } else {
+                  // If no addresses exist, create a new array with the current values
+                  await AsyncStorage.setItem("addresses", JSON.stringify([values]));
+                }
+          
+                // Optionally, log the updated or initialized addresses
+                const updatedAddresses = await AsyncStorage.getItem("addresses");
+                console.log('Addresses:', JSON.parse(updatedAddresses));
+              } catch (error) {
+                console.error('AsyncStorage error:', error);
+              }
             }
-            formik.setErrors(errors);
-
-            // const res = await Auth_service.userSignUp(values)
-            // console.log(res)
-
-        },
+          }
     })
     return (
         <View style={styles.mainContainer}>
@@ -38,7 +99,7 @@ const Customer_Adresses = ({ navigation }) => {
                 notifications
                 onBackPress={() => navigation.goBack()}
                 onNotification={() => navigation.navigate('Messages')}
-                title="Your Addresses"
+                title="Add Address"
             />
             <View style={styles.formContainer}>
                 <Input label="Recepient Name"
@@ -48,6 +109,7 @@ const Customer_Adresses = ({ navigation }) => {
                     <Text style={globelstyle.errorText}>{formik.errors.name}</Text>
                 ) : null}
                 <Input label="Mobile Number"
+                    isMobileNumber
                     placeholder="Enter Contact Number"
                     onChangeText={formik.handleChange('mobile')} />
                 {formik.touched.mobile && formik.errors.mobile ? (
@@ -75,5 +137,3 @@ const Customer_Adresses = ({ navigation }) => {
         </View>
     )
 }
-
-export default Customer_Adresses
