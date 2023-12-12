@@ -11,7 +11,7 @@ import {colors} from '../../../../Utility/Colors';
 import {Icons} from '../../../../Utility/Icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native';
-import Customer_Adresses from '../Customer_Adresses';
+import { Customer_Adresses } from '../Customer_Adresses';
 
 const Drawer = createDrawerNavigator();
 

@@ -8,4 +8,8 @@ export const globelstyle = StyleSheet.create({
     fontWeight: '700',
     marginTop:-8,
   },
+  subHeading:{
+    color:colors.secondary,
+    fontSize:16
+  }
 });

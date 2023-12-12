@@ -11,6 +11,7 @@ const Customer_Cart = ({ navigation }) => {
   const cart = useSelector((state) => state.cart.cart);
   const [userName, setUserName] = useState('');
   const [total, setTotal] = useState('');
+  
 
   const getTotalPrice = () => {
     let totalPrice = 0;
@@ -28,6 +29,7 @@ const Customer_Cart = ({ navigation }) => {
     };
     getUserInfo();
     getTotalPrice();
+
   }, [cart]);
 
   return (
