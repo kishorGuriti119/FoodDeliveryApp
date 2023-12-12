@@ -4,6 +4,10 @@ import FlatList_box from '../Flat_List_Box';
 import { Text, View, FlatList, Image, Pressable, ScrollView } from 'react-native';
 import FoodItem from '../FoodItem';
 import CartItem from '../CartItem';
+import { Card, Button, Chip } from 'react-native-paper'
+import { colors } from '../../Utility/Colors';
+import { useNavigation } from '@react-navigation/native';
+
 
 const ShowFlatList = ({
   data,
@@ -14,11 +18,12 @@ const ShowFlatList = ({
   ordersType,
   onFoodItemClick,
   cartItemType,
-  showHorizontal
+  showHorizontal,
+  coupons
 
 }) => {
   const [selected, setSelected] = useState(defaultSelected);
-
+  const navigation = useNavigation()
   const renderList = ({ item }) => {
     if (categoryType) {
       return (
@@ -29,6 +34,21 @@ const ShowFlatList = ({
           isSelected={item.title === selected}
         />
       );
+    }
+
+    if (coupons) {
+      return (
+        <Card style={{ margin: 5 }}>
+          <Card.Title
+            title={item.info}
+            titleVariant='titleMedium'
+            right={(props) =>
+              <Chip type="flat" style={{ margin: 5 }}>{item.code}</Chip>
+            }
+          />
+          <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 140 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
+        </Card>
+      )
     }
 
     if (foodItemsType) {
@@ -45,7 +65,7 @@ const ShowFlatList = ({
 
     if (cartItemType) {
       return (
-        <CartItem item={item} key={item.id}/>
+        <CartItem item={item} key={item.id} />
       )
     }
   };

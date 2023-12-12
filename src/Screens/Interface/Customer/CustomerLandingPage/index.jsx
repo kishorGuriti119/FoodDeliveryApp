@@ -78,6 +78,7 @@ const CustomerLandingPage = () => {
 
 
       {cart.length > 0 &&  <Tab.Screen name='cart' component={Customer_Cart}
+        initialParams={data=[]}
         options={{
           tabBarLabel:"",
           tabBarIcon: ({ focused }) => (
