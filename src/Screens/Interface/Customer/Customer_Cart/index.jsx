@@ -1,20 +1,19 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, Button } from 'react-native-paper';
+import { Card, Button, Chip, Icon,MD3Colors,Divider} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import ShowFlatList from '../../../../Components/ShowFlatList';
 import { style } from './style'
+import { colors } from '../../../../Utility/Colors';
 
 const Customer_Cart = ({ route, navigation }) => {
   const { data } = route.params
-
+  const [coupon, setCoupon] = useState('')
   const getCartValue = () => {
-    console.log("Called useEffect");
-    console.log("data:", data);
-    console.log("total:", total);
     if (data) {
+      setCoupon(data)
       console.log(data)
       switch (data.type) {
         case "FLAT":
@@ -74,25 +73,54 @@ const Customer_Cart = ({ route, navigation }) => {
         PreviousPage
         onBackPress={() => navigation.navigate('HomeScreen')}
       />
-      <View style={{ height: 436 }}>
+
+      <View style={{ height: 350 }}>
         <ShowFlatList
           data={cart}
           cartItemType
           horizontal={false}
         />
       </View>
-      <Button mode="text" onPress={() => navigation.navigate("Coupons")}>
-        View Coupons
-      </Button>
-      <Card style={{ marginVertical: 5 }}>
-        <Card.Content>
-          <Text variant="titleLarge">{userName}</Text>
-          <Text variant="bodyMedium">
-            Plot NO:1, Motivity Labs Pvt Ltd, Dallas Center,
-            Raidurg, Hyderabad, Telangana - 500081
-          </Text>
-        </Card.Content>
-      </Card>
+      <View style={{ height: 220 }}>
+        <ScrollView>
+          <Card style={{ margin: 5 }}>
+            {coupon.code ? <Card.Title
+              titleStyle={{marginLeft:-30,marginTop:4}}
+              title={coupon.info}
+              titleVariant='titleMedium'
+              left={() => <Icon
+                source="check-circle"
+                color={"#05b334"}
+                size={22}
+              />}
+              right={(props) =>
+                <Chip type="flat" style={{ margin: 5 }}>{coupon.code}</Chip>
+              }
+            /> : <Chip type="flat" textStyle={{ paddingHorizontal: 90 }}>No Coupons Applied</Chip>}
+            <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 110 }} onPress={() => navigation.navigate("Coupons")}>View Coupons</Chip>
+          </Card>
+          <Card style={{ margin: 5 }}>
+            <Card.Content>
+              <Text variant="titleLarge">{userName}</Text>
+              <Text variant="bodyMedium">
+                Plot NO:1, Motivity Labs Pvt Ltd, Dallas Center,
+                Raidurg, Hyderabad, Telangana - 500081
+              </Text>
+            </Card.Content>
+          </Card>
+          <Card style={{ margin: 5 }}>
+            <Card.Content>
+              <Text variant="titleLarge">Bill Summary</Text>
+              <Divider bold/>
+              <Text variant="bodyMedium">
+                Plot NO:1, Motivity Labs Pvt Ltd, Dallas Center,
+                Raidurg, Hyderabad, Telangana - 500081
+              </Text>
+            </Card.Content>
+          </Card>
+        </ScrollView>
+      </View>
+
       <Card>
         <View
           style={{
@@ -117,6 +145,7 @@ const Customer_Cart = ({ route, navigation }) => {
           </Card.Actions>
         </View>
       </Card>
+
     </View>
   );
 };

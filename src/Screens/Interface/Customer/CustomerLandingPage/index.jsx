@@ -96,7 +96,8 @@ const CustomerLandingPage = () => {
                 }} />
               </View>
             </TouchableOpacity>
-          )
+          ),
+          
         }}
       />}
 
