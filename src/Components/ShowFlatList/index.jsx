@@ -46,7 +46,7 @@ const ShowFlatList = ({
               <Chip type="flat" style={{ margin: 5 }}>{item.code}</Chip>
             }
           />
-          <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 140 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
+          <Chip type="flat" style={{ backgroundColor: "#fafafa", margin: 5 }} textStyle={{ color: colors.primary, paddingHorizontal: 120 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
         </Card>
       )
     }
