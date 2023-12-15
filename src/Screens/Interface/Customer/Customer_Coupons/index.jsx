@@ -26,11 +26,11 @@ const couponsData = [{
 {
     id: 3,
     type: "DISCOUNT",
-    info: "You Will get Upto 10% Discount",
+    info: "You Will get Upto 10% Discount Upto Rs.1000",
     percentage: 10,
     code: "DISC10",
-    price: 80,
-    minValue: 250
+    price: 1000,
+    minValue: 2000
 }]
 
 export const Customer_Cuopons = ({ navigation }) => {

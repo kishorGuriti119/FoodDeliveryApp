@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, Button, Chip, Icon,MD3Colors,Divider} from 'react-native-paper';
+import { Card, Button, Chip, Icon, MD3Colors, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import ShowFlatList from '../../../../Components/ShowFlatList';
@@ -11,30 +11,70 @@ import { colors } from '../../../../Utility/Colors';
 const Customer_Cart = ({ route, navigation }) => {
   const { data } = route.params
   const [coupon, setCoupon] = useState('')
+  const [discountValue, setDiscountValue] = useState('')
+
+  const cart = useSelector((state) => state.cart.cart);
+  const [userName, setUserName] = useState('');
+  const [total, setTotal] = useState('');
+  const [toPay, setToPay] = useState('')
+
+
   const getCartValue = () => {
     if (data) {
       setCoupon(data)
-      console.log(data)
       switch (data.type) {
         case "FLAT":
           if (data.minValue < total) {
-            setTotal((prev) => Math.ceil(prev - data.price))
+            setDiscountValue(data.price)
+            setToPay(total - data.price)
+          }
+          else if (total < data.minValue) {
+            setDiscountValue("")
+            setToPay(total)
+
           }
           break;
         case "UPTO":
           if (data.minValue < total) {
             const discountLimit = Math.ceil(total / 100) * data.percentage
             if (discountLimit < data.price) {
-              setTotal((prev) => Math.ceil(prev - discountLimit))
-            } else {
-              setTotal((prev) => prev - data.price)
+              setDiscountValue(discountLimit)
+              setToPay(total - discountLimit)
+
             }
+            else {
+              setDiscountValue(data.price)
+              setToPay(total - data.price)
+
+            }
+          } else if (total < data.minValue) {
+            setDiscountValue("")
+            setToPay(total)
+
           }
           break;
         case "DISCOUNT":
+          if (data?.minValue < total) {
+            console.log(total)
+            const percentageValue = total / 100
+            const discountLimit = percentageValue * data.percentage
+            console.log("djfvkjfnjkfnd", discountLimit)
+            if (discountLimit < data.price) {
+              setDiscountValue(discountLimit)
+              setToPay(total - discountLimit)
 
+            }
+            else {
+              setDiscountValue(data.price)
+              setToPay(total - data.price)
+
+            }
+          } else if (total < data.minValue) {
+            setDiscountValue("")
+            setToPay(total)
+
+          }
           break;
-
         default:
           break;
       }
@@ -42,9 +82,6 @@ const Customer_Cart = ({ route, navigation }) => {
   }
 
 
-  const cart = useSelector((state) => state.cart.cart);
-  const [userName, setUserName] = useState('');
-  const [total, setTotal] = useState('');
 
 
   const getTotalPrice = () => {
@@ -62,10 +99,22 @@ const Customer_Cart = ({ route, navigation }) => {
       setUserName(user.userName);
     };
     getUserInfo();
+
+
+  }, []);
+
+  useEffect(() => {
+    // const newTotal = getTotalPrice();
+    // const newCartValue = getCartValue();
+    // if (newTotal !== total || newCartValue !== cart) {
+    //   // Update state only if there's a change
+    //   setTotal(newTotal);
+    //   setCart(newCartValue);
+    // }
     getTotalPrice();
     getCartValue()
+  }, [cart, data, total])
 
-  }, [cart, data, total]);
 
   return (
     <View style={style.container}>
@@ -85,7 +134,7 @@ const Customer_Cart = ({ route, navigation }) => {
         <ScrollView>
           <Card style={{ margin: 5 }}>
             {coupon.code ? <Card.Title
-              titleStyle={{marginLeft:-30,marginTop:4}}
+              titleStyle={{ marginLeft: -30, marginTop: 4 }}
               title={coupon.info}
               titleVariant='titleMedium'
               left={() => <Icon
@@ -111,16 +160,34 @@ const Customer_Cart = ({ route, navigation }) => {
           <Card style={{ margin: 5 }}>
             <Card.Content>
               <Text variant="titleLarge">Bill Summary</Text>
-              <Divider bold/>
-              <Text variant="bodyMedium">
-                Plot NO:1, Motivity Labs Pvt Ltd, Dallas Center,
-                Raidurg, Hyderabad, Telangana - 500081
-              </Text>
+              <Divider bold />
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text>Item Total</Text>
+                <Text>{total}</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text>Delivery Fee</Text>
+                <Text>30</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text>Item Discount</Text>
+                <Text>{discountValue}</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text>Platform Fee</Text>
+                <Text>3</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <Text>GST and Restaurant Charges</Text>
+                <Text>20</Text>
+              </View>
+              <Text>To Pay</Text>
+
             </Card.Content>
           </Card>
         </ScrollView>
       </View>
-
+      {/* Total Price Card */}
       <Card>
         <View
           style={{
@@ -135,7 +202,7 @@ const Customer_Cart = ({ route, navigation }) => {
                 Rs.
               </Text>,
               <Text key={2} style={{ fontSize: 20, fontWeight: '600' }}>
-                {total}
+                {toPay}
               </Text>,
             ]}
             subtitle="Total Price"
