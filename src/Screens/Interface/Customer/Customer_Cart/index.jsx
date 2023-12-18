@@ -18,7 +18,6 @@ const Customer_Cart = ({ route, navigation }) => {
   const [total, setTotal] = useState('');
   const [toPay, setToPay] = useState('')
 
-
   const getCartValue = () => {
     if (data) {
       setCoupon(data)
@@ -90,6 +89,10 @@ const Customer_Cart = ({ route, navigation }) => {
       totalPrice += item.quantity * item.price;
     });
     setTotal(Math.ceil(totalPrice));
+    if(!discountValue){
+      setToPay(total)
+    }
+    
   };
 
   useEffect(() => {
@@ -146,7 +149,7 @@ const Customer_Cart = ({ route, navigation }) => {
                 <Chip type="flat" style={{ margin: 5 }}>{coupon.code}</Chip>
               }
             /> : <Chip type="flat" textStyle={{ paddingHorizontal: 90 }}>No Coupons Applied</Chip>}
-            <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 110 }} onPress={() => navigation.navigate("Coupons")}>View Coupons</Chip>
+            <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 110 }} onPress={() => navigation.navigate("Coupons", {total:total })}>View Coupons</Chip>
           </Card>
           <Card style={{ margin: 5 }}>
             <Card.Content>
