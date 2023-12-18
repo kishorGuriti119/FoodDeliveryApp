@@ -28,24 +28,34 @@ const Order_Preview = ({ route, navigation }) => {
   const filterCartItems = (cart) => {
     const isItem = cart.filter((items) => items.id === item.id)
     console.log(isItem)
-    if (isItem.length > 0) {
-      setIsCart(false)
-    } else {
-      setIsCart(true)
+
+    if (isItem.length > 0 && !isItem) {
+        setIsCart(false)
+      } else {
+        if (!cart) {
+          if (item.restuarantId === cart.item.restuarantId) {
+            setIsCart(true)
+          }
+        }
+        setIsCart(true)
+
+      }
     }
-  }
-  useEffect(() => {
-    filterCartItems(cart)
-  }, [cart])
 
-  const handleAddItem = () => {
-    console.log(item, "dispatch")
-    dispatch(addToCart(item))
 
-  }
+    useEffect(() => {
 
-  return (
-    <ScrollView>
+      filterCartItems(cart)
+    }, [cart])
+
+    const handleAddItem = () => {
+      console.log(item, "dispatch")
+      
+      dispatch(addToCart(item))
+    }
+
+    return (
+      <ScrollView>
         <ImageBackground source={item.itemImage} style={style.backgroundImg}>
           <View style={style.headerPosition}>
             <InterfaceHeader
@@ -123,8 +133,8 @@ const Order_Preview = ({ route, navigation }) => {
             </View>
           </View>
         </View>
-    </ScrollView>
-  );
-};
+      </ScrollView>
+    );
+  };
 
-export default Order_Preview;
+  export default Order_Preview;

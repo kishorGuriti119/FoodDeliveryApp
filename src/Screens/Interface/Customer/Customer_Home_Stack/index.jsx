@@ -15,7 +15,7 @@ const Customer_Home_Stack = () => {
       <Stack.Screen name="AddAddress" component={Customer_AddAddress}/>
       <Stack.Screen name="orderPreview" component={Order_Preview} />
       <Stack.Screen name="OrderOnTheWay" component={OrderOnTheWay} />
-      <Stack.Screen name='Coupons' component={Customer_Cuopons}/>
+      <Stack.Screen name='Coupons' component={Customer_Cuopons} initialParams={total={}}/>
     </Stack.Navigator>
   );
 };

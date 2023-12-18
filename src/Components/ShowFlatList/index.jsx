@@ -8,7 +8,6 @@ import { Card, Button, Chip } from 'react-native-paper'
 import { colors } from '../../Utility/Colors';
 import { useNavigation } from '@react-navigation/native';
 
-
 const ShowFlatList = ({
   data,
   defaultSelected,
@@ -19,24 +18,29 @@ const ShowFlatList = ({
   onFoodItemClick,
   cartItemType,
   showHorizontal,
-  coupons
+  coupons,
+  total
 
 }) => {
   const [selected, setSelected] = useState(defaultSelected);
   const navigation = useNavigation()
+  
   const renderList = ({ item }) => {
     if (categoryType) {
       return (
         <FlatList_box
           title={item.title}
           icon={item?.icon}
-          onPress={() => setSelected(item.title)}
+          onPress={() => {
+            setSelected(item.title)
+          }}
           isSelected={item.title === selected}
         />
       );
     }
 
     if (coupons) {
+      console.log("chip", total)
       return (
         <Card style={{ margin: 5 }}>
           <Card.Title
@@ -46,7 +50,7 @@ const ShowFlatList = ({
               <Chip type="flat" style={{ margin: 5 }}>{item.code}</Chip>
             }
           />
-          <Chip type="flat" style={{ backgroundColor: "#fafafa", margin: 5 }} textStyle={{ color: colors.primary, paddingHorizontal: 120 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
+          <Chip disabled={total > item.minValue ? false : true} type="flat" style={{ margin: 5 }} textStyle={{ paddingHorizontal: 136 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
         </Card>
       )
     }

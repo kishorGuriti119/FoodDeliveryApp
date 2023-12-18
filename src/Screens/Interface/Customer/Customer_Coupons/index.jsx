@@ -33,7 +33,9 @@ const couponsData = [{
     minValue: 2000
 }]
 
-export const Customer_Cuopons = ({ navigation }) => {
+export const Customer_Cuopons = ({ route,navigation }) => {
+    const { total } = route.params
+    
     const cart = useSelector((state) => state.cart.cart)
     return (
         <View style={style.container}>
@@ -41,6 +43,7 @@ export const Customer_Cuopons = ({ navigation }) => {
             <ShowFlatList
                 coupons
                 data={couponsData}
+                total={total}
             />
         </View>
     )
