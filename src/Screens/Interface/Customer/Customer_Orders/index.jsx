@@ -8,11 +8,16 @@ import ShowFlatList from '../../../../Components/ShowFlatList';
 import { useSelector } from 'react-redux';
 
 const Customer_Orders = ({ navigation }) => {
-  const { orderStatus } = useSelector((state) => state.orderStatus)
+  const { orderStatus,orders } = useSelector((state) => state.orderStatus)
+  const [orderItems] = orders
+  
   useEffect(() => {
     console.log(orderStatus)
+    console.log(orderItems)
   }, [orderStatus])
 
+
+  
 
   return (
     <View style={style.container}>

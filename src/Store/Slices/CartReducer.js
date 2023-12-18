@@ -27,9 +27,12 @@ export const cartSlice = createSlice({
             else{
                 itemInCart.quantity--
             }
+        },
+        replaceItem:(state,action)=>{
+            state.cart =[ { ...action.payload, quantity: 1 }];
         }
     }
 })
-export const {addToCart,incrementQunatity,decrementQuantity} = cartSlice.actions
+export const {addToCart,incrementQunatity,decrementQuantity,replaceItem} = cartSlice.actions
 
 export default cartSlice.reducer

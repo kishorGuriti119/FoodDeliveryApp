@@ -3,9 +3,10 @@ import React from 'react'
 import { styles } from './style'
 import Button from '../../../../Components/Button'
 import InterfaceHeader from '../../../../Components/InterfaceHeader'
-
+import { useSelector } from 'react-redux/es/hooks/useSelector'
 
 const OrderOnTheWay = ({ navigation }) => {
+    
     return (
         <View style={styles.mainContainer}>
             <View style={styles.onthewayContainer}>
@@ -17,7 +18,7 @@ const OrderOnTheWay = ({ navigation }) => {
                     <Button title="Track Live" />
                 </View>
                 <Pressable >
-                    <Text style={styles.plaintext} onPress={()=> navigation.navigate("Home")}>Back to Home</Text>
+                    <Text style={styles.plaintext} onPress={() => navigation.navigate("Home")}>Back to Home</Text>
                 </Pressable>
 
             </View>
