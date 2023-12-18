@@ -1,14 +1,16 @@
 import { View, Text, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card, Button, Chip, Icon, MD3Colors, Divider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InterfaceHeader from '../../../../Components/InterfaceHeader';
 import ShowFlatList from '../../../../Components/ShowFlatList';
 import { style } from './style'
 import { colors } from '../../../../Utility/Colors';
+import { addOrder } from '../../../../Store/Slices/OrdersReducer';
 
 const Customer_Cart = ({ route, navigation }) => {
+  const dispatch = useDispatch()
   const { data } = route.params
   const [coupon, setCoupon] = useState('')
   const [discountValue, setDiscountValue] = useState('')
@@ -89,10 +91,10 @@ const Customer_Cart = ({ route, navigation }) => {
       totalPrice += item.quantity * item.price;
     });
     setTotal(Math.ceil(totalPrice));
-    if(!discountValue){
+    if (!discountValue) {
       setToPay(total)
     }
-    
+
   };
 
   useEffect(() => {
@@ -149,7 +151,7 @@ const Customer_Cart = ({ route, navigation }) => {
                 <Chip type="flat" style={{ margin: 5 }}>{coupon.code}</Chip>
               }
             /> : <Chip type="flat" textStyle={{ paddingHorizontal: 90 }}>No Coupons Applied</Chip>}
-            <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 110 }} onPress={() => navigation.navigate("Coupons", {total:total })}>View Coupons</Chip>
+            <Chip type="flat" style={{ backgroundColor: "#fafafa", }} textStyle={{ color: colors.primary, paddingHorizontal: 110 }} onPress={() => navigation.navigate("Coupons", { total: total })}>View Coupons</Chip>
           </Card>
           <Card style={{ margin: 5 }}>
             <Card.Content>
@@ -211,7 +213,10 @@ const Customer_Cart = ({ route, navigation }) => {
             subtitle="Total Price"
           />
           <Card.Actions style={{ marginLeft: 'auto' }}>
-            <Button mode="contained-tonal" onPress={() => navigation.navigate('OrderOnTheWay')}>Place Order</Button>
+            <Button mode="contained-tonal" onPress={() => {
+              dispatch(addOrder(cart))
+              navigation.navigate('OrderOnTheWay')
+            }}>Place Order</Button>
           </Card.Actions>
         </View>
       </Card>
