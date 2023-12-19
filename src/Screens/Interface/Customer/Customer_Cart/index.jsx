@@ -29,7 +29,7 @@ const Customer_Cart = ({ route, navigation }) => {
             setDiscountValue(data.price)
             setToPay(total - data.price)
           }
-          else if (total < data.minValue) {
+          else if {
             setDiscountValue("")
             setToPay(total)
 
