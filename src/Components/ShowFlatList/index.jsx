@@ -7,6 +7,7 @@ import CartItem from '../CartItem';
 import { Card, Button, Chip } from 'react-native-paper'
 import { colors } from '../../Utility/Colors';
 import { useNavigation } from '@react-navigation/native';
+import { style } from './style';
 
 const ShowFlatList = ({
   data,
@@ -19,28 +20,30 @@ const ShowFlatList = ({
   cartItemType,
   showHorizontal,
   coupons,
-  total
+  total,
+  mystyle
 
 }) => {
   const [selected, setSelected] = useState(defaultSelected);
   const navigation = useNavigation()
-  
+
   const renderList = ({ item }) => {
     if (categoryType) {
       return (
-        <FlatList_box
-          title={item.title}
-          icon={item?.icon}
-          onPress={() => {
-            setSelected(item.title)
-          }}
-          isSelected={item.title === selected}
-        />
+        <View style={{ ...mystyle }}>
+          <FlatList_box
+            title={item.title}
+            icon={item?.icon}
+            onPress={() => {
+              setSelected(item.title)
+            }}
+            isSelected={item.title === selected}
+          />
+        </View>
       );
     }
 
     if (coupons) {
-      console.log("chip", total)
       return (
         <Card style={{ margin: 5 }}>
           <Card.Title
@@ -50,7 +53,13 @@ const ShowFlatList = ({
               <Chip type="flat" style={{ margin: 5 }}>{item.code}</Chip>
             }
           />
-          <Chip disabled={total > item.minValue ? false : true} type="flat" style={{ margin: 5 }} textStyle={{ paddingHorizontal: 136 }} onPress={() => navigation.navigate('cart', { data: item })}>Apply</Chip>
+          <View style={style.couponApplyBtnStyle}>
+            <Pressable disabled={total > item.minValue ? false : true}
+              type="flat"
+              style={{ margin: 5, }}
+              onPress={() => navigation.navigate('cart', { data: item })}><Text style={{ fontWeight: "bold" }}>Apply</Text>
+            </Pressable>
+          </View>
         </Card>
       )
     }

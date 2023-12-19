@@ -25,26 +25,22 @@ export const Order_category = [
 
 export const Order_status = [
   {
-    title: 'Pending',
+    title: 'Current Order',
     icon: '',
   },
   {
-    title: 'Completed',
+    title: 'Delivered',
     icon: '',
   },
   {
     title: 'Cancelled',
     icon: '',
-  },
-  {
-    title: 'Special Orders',
-    icon: '',
-  },
+  }
 ];
 
 export const FoodItems = [
   {
-    id:1,
+    menuItemId:1,
     restaurantId:"ABC",
     itemImage: require('../assets/item_1.png'),
     title: 'Efo Riro & Pounded Yam',
@@ -52,7 +48,7 @@ export const FoodItems = [
     deliveryTime: 30,
   },
   {
-    id:2,
+    menuItemId:2,
     restaurantId:"DEF",
     itemImage: require('../assets/item_2.png'),
     title: 'Egg Ramen',
@@ -60,7 +56,7 @@ export const FoodItems = [
     deliveryTime: 30,
   },
   {
-    id:3,
+    menuItemId:3,
     restaurantId:"ABC",
     itemImage: require('../assets/item_3.png'),
     title: 'Catfish Pepersoup',
@@ -68,7 +64,7 @@ export const FoodItems = [
     deliveryTime: 30,
   },
   {
-    id:4,
+    menuItemId:4,
     restaurantId:"DEF",
     itemImage: require('../assets/item_4.png'),
     title: 'Crayfish Ramen',
@@ -76,7 +72,7 @@ export const FoodItems = [
     deliveryTime: 30,
   },
   {
-    id:5,
+    menuItemId:5,
     restaurantId:"GHI",
     itemImage: require('../assets/item_5.png'),
     title: 'Chicken Alfredo',
@@ -84,7 +80,7 @@ export const FoodItems = [
     deliveryTime: 30,
   },
   {
-    id:6,
+    menuItemId:6,
     restaurantId:"GHI",
     itemImage: require('../assets/item_6.png'),
     title: 'Chicken Alfredo',

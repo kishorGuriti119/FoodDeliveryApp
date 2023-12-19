@@ -24,7 +24,7 @@ export const Icons = {
   Home: require('../assets/Home.png'),
   Home_Focused: require('../assets/Home_Focused.png'),
 
-  user: require('../assets/user.png'),
+  user: require('../assets/user.svg'),
   user_shade: require('../assets/user_dark.png'),
   user_circle: require('../assets/user_circle.png'),
   profile: require('../assets/user.png'),
@@ -54,7 +54,7 @@ export const Icons = {
   special_card_image: require('../assets/special_card_image.png'),
   customer_Profile: require('../assets/customer_Profile.png'),
 
-  notificationIcon: require('../assets/notification.png'),
+  notificationIcon: require('../assets/notification-ringing.png'),
   logout: require('../assets/logout.png'),
   cart:require('../assets/cart.png'),
   paymentsIcon: require('../assets/paymentsIcon.png'),

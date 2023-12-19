@@ -29,7 +29,7 @@ const Order_Preview = ({ route, navigation }) => {
   const { item } = route?.params;
 
   const filterCartItems = (cart) => {
-    const isItem = cart.filter((items) => items.id === item.id)
+    const isItem = cart.filter((items) => items.menuItemId === item.menuItemId)
     console.log(isItem)
 
     if (isItem.length > 0 && isItem) {

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, ToastAndroid } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Button, Chip, Icon, MD3Colors, Divider } from 'react-native-paper';
@@ -8,6 +8,8 @@ import ShowFlatList from '../../../../Components/ShowFlatList';
 import { style } from './style'
 import { colors } from '../../../../Utility/Colors';
 import { addOrder } from '../../../../Store/Slices/OrdersReducer';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 
 const Customer_Cart = ({ route, navigation }) => {
   const dispatch = useDispatch()
@@ -29,7 +31,7 @@ const Customer_Cart = ({ route, navigation }) => {
             setDiscountValue(data.price)
             setToPay(total - data.price)
           }
-          else if (total < data.minValue) {
+          else  {
             setDiscountValue("")
             setToPay(total)
 
@@ -120,6 +122,31 @@ const Customer_Cart = ({ route, navigation }) => {
     getCartValue()
   }, [cart, data, total])
 
+  const placeOrder = async (cart) => {
+    const filteredItems = cart.map(item => ({
+      menuItemId: item.menuItemId,
+      quantity: item.quantity
+    }));
+    let userdetails = await AsyncStorage.getItem('token');
+    userdetails = jwtDecode(userdetails);
+    const orderRequest = {
+      customerId: userdetails.sid,
+      restaurantId: cart[0].restaurantId,
+      orderItems: filteredItems,
+      status: "ACCEPTED",
+      totalAmount: total,
+      orderTime: new Date(),
+      coupon: coupon ? coupon.code : "",
+      finalPrice: toPay
+    }
+    try {
+      const { data } = await axios.post("http://172.16.4.243:8080/orders/placeOrder", orderRequest)
+      console.log(data)
+      navigation.navigate('OrderOnTheWay')
+    } catch (error) {
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
+    }
+  }
 
   return (
     <View style={style.container}>
@@ -139,7 +166,7 @@ const Customer_Cart = ({ route, navigation }) => {
         <ScrollView>
           <Card style={{ margin: 5 }}>
             {coupon.code ? <Card.Title
-              titleStyle={{ marginLeft: -30, marginTop: 4 }}
+              titleStyle={{ marginLeft: -30, marginTop: 4}}
               title={coupon.info}
               titleVariant='titleMedium'
               left={() => <Icon
@@ -166,23 +193,23 @@ const Customer_Cart = ({ route, navigation }) => {
             <Card.Content>
               <Text variant="titleLarge">Bill Summary</Text>
               <Divider bold />
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={style.rowSpaceBtwn}>
                 <Text>Item Total</Text>
                 <Text>{total}</Text>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={style.rowSpaceBtwn}>
                 <Text>Delivery Fee</Text>
                 <Text>30</Text>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={style.rowSpaceBtwn}>
                 <Text>Item Discount</Text>
                 <Text>{discountValue}</Text>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={style.rowSpaceBtwn}>
                 <Text>Platform Fee</Text>
                 <Text>3</Text>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View style={style.rowSpaceBtwn}>
                 <Text>GST and Restaurant Charges</Text>
                 <Text>20</Text>
               </View>
@@ -214,8 +241,8 @@ const Customer_Cart = ({ route, navigation }) => {
           />
           <Card.Actions style={{ marginLeft: 'auto' }}>
             <Button mode="contained-tonal" onPress={() => {
+              placeOrder(cart)
               dispatch(addOrder(cart))
-              navigation.navigate('OrderOnTheWay')
             }}>Place Order</Button>
           </Card.Actions>
         </View>

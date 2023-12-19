@@ -1,17 +1,20 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomerLandingPage from '../CustomerLandingPage';
 import Customer_Profile from '../Customer_Profile';
 import Customer_Orders from '../Customer_Orders';
 import Customer_Notifications from '../Customer_Notifications';
 import Customer_Messages from '../Customer_Messages';
 import Modified_Drawer from '../Modified_Drawer';
-import {Dimensions} from 'react-native';
-import {colors} from '../../../../Utility/Colors';
-import {Icons} from '../../../../Utility/Icons';
+import { Dimensions } from 'react-native';
+import { colors } from '../../../../Utility/Colors';
+import { Icons } from '../../../../Utility/Icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Image} from 'react-native';
+import { Image } from 'react-native';
 import { Customer_Adresses } from '../Customer_Adresses';
+import {style} from './style'
+
+
 
 const Drawer = createDrawerNavigator();
 
@@ -21,11 +24,12 @@ const Customer_Drawer = () => {
       drawerContent={props => <Modified_Drawer {...props} />}
       screenOptions={{
         headerShown: false,
-        drawerStyle: {borderTopRightRadius: 24, width: 320},
+        drawerStyle: { borderTopRightRadius: 24, width: 320 },
         drawerInactiveBackgroundColor: colors.countryCodeBackground,
         drawerItemStyle: {
           height: 60,
-          paddingHorizontal: 12,
+          padding: 8,
+
         },
         drawerLabelStyle: {
           marginLeft: -20,
@@ -38,9 +42,9 @@ const Customer_Drawer = () => {
         name="Home"
         component={CustomerLandingPage}
         options={{
-          drawerIcon: ({color}) => {
+          drawerIcon: ({ color }) => {
             return (
-              <Image source={Icons.Home} style={{width: 23, height: 27}} />
+              <Image source={Icons.Home} style={style.iconSize} />
             );
           },
         }}
@@ -49,11 +53,11 @@ const Customer_Drawer = () => {
         name="Notifications"
         component={Customer_Notifications}
         options={{
-          drawerIcon: ({color}) => {
+          drawerIcon: ({ color }) => {
             return (
               <Image
                 source={Icons.notificationIcon}
-                style={{width: 22, height: 27}}
+                style={style.iconSize}
               />
             );
           },
@@ -63,11 +67,11 @@ const Customer_Drawer = () => {
         name="Messages"
         component={Customer_Messages}
         options={{
-          drawerIcon: ({color}) => {
+          drawerIcon: ({ color }) => {
             return (
               <Image
                 source={Icons.email_outline}
-                style={{width: 24, height: 27}}
+                style={style.iconSize}
               />
             );
           },
@@ -77,11 +81,11 @@ const Customer_Drawer = () => {
         name="Addresses"
         component={Customer_Adresses}
         options={{
-          drawerIcon: ({color}) => {
+          drawerIcon: ({ color }) => {
             return (
               <Image
                 source={Icons.custom_user}
-                style={{width: 26, height: 30}}
+                style={style.iconSize}
               />
             );
           },
@@ -91,11 +95,11 @@ const Customer_Drawer = () => {
         name="Profile"
         component={Customer_Profile}
         options={{
-          drawerIcon: ({color}) => {
+          drawerIcon: ({ color }) => {
             return (
               <Image
                 source={Icons.custom_user}
-                style={{width: 26, height: 30}}
+                style={style.iconSize}
               />
             );
           },

@@ -147,7 +147,8 @@ const Login = ({navigation}) => {
           </View>
           <View style={style.loginActions}>
             <View style={style.checkBoxContainer}>
-              <CheckBox isChecked={isChecked} handleCheck={setIsChecked} />
+              <Check
+              Box isChecked={isChecked} handleCheck={setIsChecked} />
               <Text style={style.CheckBoxLabel}>Remember me</Text>
             </View>
             <Pressable onPress={() => navigation.navigate('forgotpassword')}>

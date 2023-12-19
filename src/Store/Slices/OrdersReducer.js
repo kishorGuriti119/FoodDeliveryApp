@@ -11,7 +11,12 @@ export const orderStatusSlice = createSlice({
             state.orderStatus = action.payload
         },
         addOrder:(state,action)=>{
-            state.orders.push({orderItems:[...action.payload],orderId:1,statusOfOrder:'Pending'})
+            const filteredItems = action.payload.map(item => ({
+                menuItemId: item.menuItemId,
+                quantity: item.quantity
+              }));
+              console.log(filteredItems);
+            // state.orders.push({orderItems:[...action.payload],orderId:1,statusOfOrder:'Pending'})
         }
     }
 })

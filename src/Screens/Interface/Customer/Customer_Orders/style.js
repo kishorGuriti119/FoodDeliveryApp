@@ -15,4 +15,7 @@ export const style = StyleSheet.create({
     fontWeight: '800',
     color: colors.secondary,
   },
+  horizontalSpacingStyle:{
+    paddingHorizontal:12
+  }
 });
