@@ -31,7 +31,7 @@ const Customer_Cart = ({ route, navigation }) => {
             setDiscountValue(data.price)
             setToPay(total - data.price)
           }
-          else  {
+          else {
             setDiscountValue("")
             setToPay(total)
 
@@ -140,8 +140,9 @@ const Customer_Cart = ({ route, navigation }) => {
       finalPrice: toPay
     }
     try {
-      const { data } = await axios.post("http://172.16.4.243:8080/orders/placeOrder", orderRequest)
+      const { data } = await axios.post("http://10.0.2.2:8080/orders/placeOrder", orderRequest)
       console.log(data)
+
       navigation.navigate('OrderOnTheWay')
     } catch (error) {
       ToastAndroid.show(error.message, ToastAndroid.SHORT);
@@ -149,24 +150,25 @@ const Customer_Cart = ({ route, navigation }) => {
   }
 
   return (
-    <View style={style.container}>
-      <InterfaceHeader
-        PreviousPage
-        onBackPress={() => navigation.navigate('HomeScreen')}
-      />
 
-      <View style={{ height: 350 }}>
-        <ShowFlatList
-          data={cart}
-          cartItemType
-          horizontal={false}
+    <View style={style.container}>
+      <ScrollView>
+        <InterfaceHeader
+          PreviousPage
+          onBackPress={() => navigation.navigate('HomeScreen')}
         />
-      </View>
-      <View style={{ height: 220 }}>
-        <ScrollView>
+
+        <View >
+          <ShowFlatList
+            data={cart}
+            cartItemType
+            horizontal={false}
+          />
+        </View>
+        <View>
           <Card style={{ margin: 5 }}>
             {coupon.code ? <Card.Title
-              titleStyle={{ marginLeft: -30, marginTop: 4}}
+              titleStyle={{ marginLeft: -30, marginTop: 4 }}
               title={coupon.info}
               titleVariant='titleMedium'
               left={() => <Icon
@@ -217,10 +219,15 @@ const Customer_Cart = ({ route, navigation }) => {
 
             </Card.Content>
           </Card>
-        </ScrollView>
-      </View>
-      {/* Total Price Card */}
-      <Card>
+
+        </View>
+      </ScrollView>
+      <Card style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}>
         <View
           style={{
             flexDirection: 'row',
@@ -247,8 +254,8 @@ const Customer_Cart = ({ route, navigation }) => {
           </Card.Actions>
         </View>
       </Card>
-
     </View>
+
   );
 };
 

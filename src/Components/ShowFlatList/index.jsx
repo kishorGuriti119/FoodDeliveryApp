@@ -53,8 +53,9 @@ const ShowFlatList = ({
               <Chip type="flat" style={{ margin: 5 }}>{item.code}</Chip>
             }
           />
-          <View style={style.couponApplyBtnStyle}>
+          <View style={[style.couponApplyBtnStyle, total > item.minValue ? style.enabledBtn : style.disabledBtn]}>
             <Pressable disabled={total > item.minValue ? false : true}
+              hitSlop={50}
               type="flat"
               style={{ margin: 5, }}
               onPress={() => navigation.navigate('cart', { data: item })}><Text style={{ fontWeight: "bold" }}>Apply</Text>

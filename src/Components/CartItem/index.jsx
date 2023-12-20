@@ -7,9 +7,8 @@ import { useDispatch } from 'react-redux';
 import { colors } from '../../Utility/Colors';
 
 const CartItem = ({ item }) => {
-
+    
     dispatch = useDispatch()
-
     const increaseQunatity = () => {
         dispatch(incrementQunatity(item))
         console.log("Increased")
