@@ -1,4 +1,4 @@
-const FDA_Base_Url = 'http://172.16.2.246:';
+const FDA_Base_Url = 'http://10.0.2.2:';
 
 export const API = {
   // Authontication
